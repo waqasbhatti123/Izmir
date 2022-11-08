@@ -1,0 +1,65 @@
+2022-10-05 00:37:26.7135 - INFO: A new user is trying to sign in
+2022-10-05 00:37:28.9994 - INFO: Correct credentials
+2022-10-05 13:23:20.2791 - INFO: A new user is trying to sign in
+2022-10-05 13:23:23.0007 - INFO: Correct credentials
+2022-10-05 13:35:41.5056 - INFO: A new user is trying to sign in
+2022-10-05 13:35:44.7269 - INFO: Correct credentials
+2022-10-05 13:47:19.9425 - INFO: A new user is trying to sign in
+2022-10-05 13:47:22.9683 - INFO: Correct credentials
+2022-10-05 14:06:39.9872 - INFO: A new user is trying to sign in
+2022-10-05 14:06:42.5579 - INFO: Correct credentials
+2022-10-05 14:14:56.3881 - INFO: A new user is trying to sign in
+2022-10-05 14:14:59.6907 - INFO: Correct credentials
+2022-10-05 14:15:39.2316 - ERROR: Month Name Load Failed
+EXCEPTION: System.NullReferenceException: Object reference not set to an instance of an object.
+   at FOS.Setup.ManageCity.<>c.<GetConsumerForGrid>b__80_0(Tbl_IZConsumers u) in F:\ZamZamProjects\Project\Izmir\Setup\ManageCity.cs:line 2621
+   at System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at FOS.Setup.ManageCity.GetConsumerForGrid() in F:\ZamZamProjects\Project\Izmir\Setup\ManageCity.cs:line 2619
+2022-10-05 14:18:05.6563 - ERROR: Month Name Load Failed
+EXCEPTION: System.NullReferenceException: Object reference not set to an instance of an object.
+   at FOS.Setup.ManageCity.<>c.<GetConsumerForGrid>b__80_0(Tbl_IZConsumers u) in F:\ZamZamProjects\Project\Izmir\Setup\ManageCity.cs:line 2621
+   at System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at FOS.Setup.ManageCity.GetConsumerForGrid() in F:\ZamZamProjects\Project\Izmir\Setup\ManageCity.cs:line 2619
+2022-10-05 14:20:39.8859 - INFO: A new user is trying to sign in
+2022-10-05 14:20:45.2042 - INFO: Correct credentials
+2022-10-05 14:20:51.2346 - ERROR: Month Name Load Failed
+EXCEPTION: System.NullReferenceException: Object reference not set to an instance of an object.
+   at FOS.Setup.ManageCity.<>c.<GetConsumerForGrid>b__80_0(Tbl_IZConsumers u) in F:\ZamZamProjects\Project\Izmir\Setup\ManageCity.cs:line 2621
+   at System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at FOS.Setup.ManageCity.GetConsumerForGrid() in F:\ZamZamProjects\Project\Izmir\Setup\ManageCity.cs:line 2619
+2022-10-05 14:21:12.6364 - ERROR: Month Name Load Failed
+EXCEPTION: System.NullReferenceException: Object reference not set to an instance of an object.
+   at FOS.Setup.ManageCity.<>c.<GetConsumerForGrid>b__80_0(Tbl_IZConsumers u) in F:\ZamZamProjects\Project\Izmir\Setup\ManageCity.cs:line 2621
+   at System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at FOS.Setup.ManageCity.GetConsumerForGrid() in F:\ZamZamProjects\Project\Izmir\Setup\ManageCity.cs:line 2619
+2022-10-05 14:21:43.6216 - ERROR: Month Name Load Failed
+EXCEPTION: System.NullReferenceException: Object reference not set to an instance of an object.
+   at FOS.Setup.ManageCity.<>c.<GetConsumerForGrid>b__80_0(Tbl_IZConsumers u) in F:\ZamZamProjects\Project\Izmir\Setup\ManageCity.cs:line 2621
+   at System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at FOS.Setup.ManageCity.GetConsumerForGrid() in F:\ZamZamProjects\Project\Izmir\Setup\ManageCity.cs:line 2619
+2022-10-05 14:24:35.9291 - INFO: A new user is trying to sign in
+2022-10-05 14:24:40.2312 - INFO: Correct credentials
+2022-10-05 14:36:53.7151 - INFO: A new user is trying to sign in
+2022-10-05 14:36:56.2135 - INFO: Correct credentials
+2022-10-05 14:51:23.3072 - INFO: A new user is trying to sign in
+2022-10-05 14:51:27.2130 - INFO: Correct credentials
+2022-10-05 14:55:43.2596 - INFO: A new user is trying to sign in
+2022-10-05 14:55:59.0291 - INFO: Correct credentials
+2022-10-05 15:01:45.3191 - INFO: A new user is trying to sign in
+2022-10-05 15:01:49.0969 - INFO: Correct credentials
+2022-10-05 16:10:46.8164 - INFO: A new user is trying to sign in
+2022-10-05 16:10:51.0325 - INFO: Correct credentials
+2022-10-05 16:12:36.2758 - INFO: A new user is trying to sign in
+2022-10-05 16:12:42.1416 - INFO: Correct credentials
+2022-10-05 16:14:30.0552 - INFO: A new user is trying to sign in
+2022-10-05 16:14:39.1411 - INFO: Correct credentials
