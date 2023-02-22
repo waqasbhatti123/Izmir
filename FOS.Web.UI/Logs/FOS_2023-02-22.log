@@ -1,0 +1,72 @@
+2023-02-22 02:57:44.5058 - INFO: A new user is trying to sign in
+2023-02-22 02:57:49.4596 - INFO: Correct credentials
+2023-02-22 03:26:49.5221 - INFO: A new user is trying to sign in
+2023-02-22 03:26:53.4258 - INFO: Correct credentials
+2023-02-22 03:28:35.7246 - INFO: A new user is trying to sign in
+2023-02-22 03:28:42.0805 - INFO: Correct credentials
+2023-02-22 03:28:44.1504 - INFO: A new user is trying to sign in
+2023-02-22 03:28:44.1564 - INFO: Correct credentials
+2023-02-22 03:36:13.4493 - INFO: A new user is trying to sign in
+2023-02-22 03:36:17.3484 - INFO: Correct credentials
+2023-02-22 03:42:20.5480 - INFO: A new user is trying to sign in
+2023-02-22 03:42:23.6532 - INFO: Correct credentials
+2023-02-22 03:45:05.2027 - INFO: A new user is trying to sign in
+2023-02-22 03:45:10.3400 - INFO: Correct credentials
+2023-02-22 04:43:22.0967 - INFO: A new user is trying to sign in
+2023-02-22 04:43:26.1305 - INFO: Correct credentials
+2023-02-22 04:52:45.4627 - INFO: A new user is trying to sign in
+2023-02-22 04:52:56.3340 - INFO: Correct credentials
+2023-02-22 05:00:01.2217 - INFO: A new user is trying to sign in
+2023-02-22 05:00:13.6262 - INFO: Correct credentials
+2023-02-22 05:11:55.4374 - INFO: A new user is trying to sign in
+2023-02-22 05:12:08.2741 - INFO: Correct credentials
+2023-02-22 05:16:43.0997 - INFO: A new user is trying to sign in
+2023-02-22 05:16:45.5325 - INFO: Correct credentials
+2023-02-22 05:17:05.3966 - ERROR: Month Name Load Failed
+EXCEPTION: System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at FOS.Setup.ManageCreateBill.<>c.<GetBillData>b__0_1(Tbl_IZCreateBill u) in F:\ZamZamProjects\Project\Izmir-master\Setup\ManageCreateBill.cs:line 24
+   at System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at FOS.Setup.ManageCreateBill.GetBillData(Int32 BlockID) in F:\ZamZamProjects\Project\Izmir-master\Setup\ManageCreateBill.cs:line 22
+2023-02-22 05:18:08.9439 - INFO: A new user is trying to sign in
+2023-02-22 05:18:14.9481 - INFO: Correct credentials
+2023-02-22 05:22:34.6562 - INFO: A new user is trying to sign in
+2023-02-22 05:22:41.8895 - INFO: Correct credentials
+2023-02-22 05:25:02.1504 - INFO: A new user is trying to sign in
+2023-02-22 05:25:04.7597 - INFO: Correct credentials
+2023-02-22 05:47:49.1272 - INFO: A new user is trying to sign in
+2023-02-22 05:47:53.6111 - INFO: Correct credentials
+2023-02-22 05:50:50.5029 - INFO: A new user is trying to sign in
+2023-02-22 05:51:06.6710 - INFO: Correct credentials
+2023-02-22 05:54:06.7928 - INFO: A new user is trying to sign in
+2023-02-22 05:54:06.8623 - INFO: Correct credentials
+2023-02-22 05:59:24.7362 - INFO: A new user is trying to sign in
+2023-02-22 05:59:28.0874 - INFO: Correct credentials
+2023-02-22 15:01:20.2755 - INFO: A new user is trying to sign in
+2023-02-22 15:01:22.8103 - INFO: Correct credentials
+2023-02-22 15:04:27.2196 - INFO: A new user is trying to sign in
+2023-02-22 15:04:29.7355 - INFO: Correct credentials
+2023-02-22 15:14:48.4741 - INFO: A new user is trying to sign in
+2023-02-22 15:14:48.4995 - INFO: Correct credentials
+2023-02-22 15:16:09.9154 - INFO: A new user is trying to sign in
+2023-02-22 15:16:12.0584 - INFO: Correct credentials
+2023-02-22 15:20:40.3251 - INFO: A new user is trying to sign in
+2023-02-22 15:20:42.5103 - INFO: Correct credentials
+2023-02-22 15:24:40.6971 - INFO: A new user is trying to sign in
+2023-02-22 15:24:43.2794 - INFO: Correct credentials
+2023-02-22 15:33:22.7287 - INFO: A new user is trying to sign in
+2023-02-22 15:33:24.9575 - INFO: Correct credentials
+2023-02-22 15:40:22.6609 - INFO: A new user is trying to sign in
+2023-02-22 15:40:28.8261 - INFO: Correct credentials
+2023-02-22 15:42:25.2643 - INFO: A new user is trying to sign in
+2023-02-22 15:42:27.5131 - INFO: Correct credentials
+2023-02-22 15:51:11.5433 - INFO: A new user is trying to sign in
+2023-02-22 15:51:14.3388 - INFO: Correct credentials
+2023-02-22 15:57:52.4968 - INFO: A new user is trying to sign in
+2023-02-22 15:57:55.1625 - INFO: Correct credentials
+2023-02-22 16:14:16.4198 - INFO: A new user is trying to sign in
+2023-02-22 16:14:18.6186 - INFO: Correct credentials

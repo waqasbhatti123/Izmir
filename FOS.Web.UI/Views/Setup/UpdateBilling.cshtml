@@ -1,0 +1,395 @@
+﻿@model FOS.Shared.RegionData
+
+@{
+    ViewBag.Title = "Client";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/GridSystem.css" rel="stylesheet" />
+<!-- BEGIN PAGE HEADER-->
+<div class="row-fluid">
+    <div class="span12">
+        <!-- BEGIN THEME CUSTOMIZER-->
+        <!-- END THEME CUSTOMIZER-->
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        @*<h3 class="page-title"></h3>
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">Setup</a>
+                <span class="divider">/</span>
+            </li>
+            <li>
+                <a href="#">Manage Client</a>
+            </li>
+        </ul>*@
+        <!-- END PAGE TITLE & BREADCRUMB-->
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget green" style="">
+            <div class="widget-title">
+                <h4 class="text-center"><strong>Update Billing </strong></h4>
+            </div>
+            <div class="widget-body">
+
+                <div class="span12" style="margin-left:0px;">
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">ConsumerNO:*</label>
+                            <div class="controls">
+                                @Html.TextBoxFor(model => model.ConsumerID, new { placeholder = "Enter Consumer No", @class = "" })
+                                @Html.ValidationMessageFor(model => model.ConsumerID)
+                            </div>
+                        </div>
+                    </div>
+              
+
+                </div>
+
+
+                <div class="span12" style="margin-left:0px;">
+                    <div class="control-group" style="border-top: 1px solid #e5e5e5;">
+                        <div class="form-actions" style="padding-left: 540px;">
+                            <button id="btnNew" class="btn btn-primary bold"><i class="icon-ok icon-white"></i><span id="create">Get Data</span></button>
+                           
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+@using (Ajax.BeginForm("AddUpdateBillingData", "Setup", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true)
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget green" style="">
+              
+                <div class="widget-body">
+
+                    <div class="span12" style="margin-left:0px;">
+                        <div class="span4">
+                            <div class="control-group">
+                                <label class="control-label">ConsumerID:*</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(model => model.ConsumerNo, new { @readonly = "readonly", placeholder = "ConsumerID", @class = "" })
+                                    @Html.ValidationMessageFor(model => model.ConsumerNo)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="control-group">
+                                <label class="control-label">ConsumerName:*</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(model => model.ConsumerName, new { @readonly = "readonly", placeholder = "ConsumerName", @class = "" })
+                                    @Html.ValidationMessageFor(model => model.ConsumerName)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="control-group">
+                                <label class="control-label">Billing Month:*</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(model => model.BillIssueDate, new { @readonly = "readonly", placeholder = "Billing Month", @class = "" })
+                                    @Html.ValidationMessageFor(model => model.BillIssueDate)
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="span12" style="margin-left:0px;">
+                        <div class="span4">
+                            <div class="control-group">
+                                <label class="control-label">Due Date:*</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(model => model.DueDate, new { @readonly = "readonly", placeholder = "Due Date", @class = "" })
+                                    @Html.ValidationMessageFor(model => model.DueDate)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="control-group">
+                                <label class="control-label">Payable Amount:*</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(model => model.AmountDue, new { @readonly = "readonly", placeholder = "Amount Due", @class = "" })
+                                    @Html.ValidationMessageFor(model => model.AmountDue)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="control-group">
+                                <label class="control-label">Billing Period Title*</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(model => model.BillPeriodTitle, new { @readonly = "readonly", placeholder = "Billing Period Title", @class = "" })
+                                    @Html.ValidationMessageFor(model => model.BillPeriodTitle)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span12" style="margin-left:0px;">
+                            <div class="span8">
+                                <div class="control-group">
+                                    <label class="control-label">Receive Amount*</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(model => model.ConsumerID, new { style = "width:500px", placeholder = "Enter Receive Amount", @class = "" })
+                                        @Html.ValidationMessageFor(model => model.ConsumerID)
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        </div>
+                        <div class="span12" style="margin-left:0px;">
+                            <div class="control-group" style="border-top: 1px solid #e5e5e5;">
+                                <div class="form-actions" style="padding-left: 540px;">
+                                    <button id="btnNew1" class="btn btn-primary bold"><i class="icon-ok icon-white"></i><span id="create">Save Amount</span></button>
+                                   
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+        </div>
+    </div>
+
+}
+<!-- BEGIN EDITABLE TABLE widget-->
+
+<!-- END EDITABLE TABLE widget-->
+
+<script>
+
+    @*function GenerateDetailGrid() {
+
+        //$('#datatab tfoot th').each(function () {
+        //    $(this).html('<input type="text" />');
+        //});
+        var oTable = $('#datatab').DataTable({
+            "aLengthMenu": [[10, 25, 50, 75, 100], [10, 25, 50, 75, 100]],
+            "iDisplayLength": 10,
+            "paging": true,
+            "pagingType": "full_numbers",
+            "serverSide": true,
+            "bRetrieve": true,
+            "bDestroy": true,
+            "autoWidth": true,
+            "ajax": {
+                "type": "POST",
+                "url": '@Url.Action("RegionDataHandler", "Setup")',
+                "contentType": 'application/json; charset=utf-8',
+                'data': function (data) {
+                    data.CityID = $('#CityID').val();
+                    return data = JSON.stringify(data);
+                },
+            },
+            "fnDrawCallback": function (osetting) {
+
+                var UpdateCheck = "0";
+                var DeleteCheck = "0";
+
+                if (UpdateCheck == "@HttpContext.Current.Session["UpdateCheck"]") { $(".edit").css("display", "none"); }
+                else {
+                    $(".edit").on("click", function () {
+                        ClearForm();
+                        $('#create').text('Update');
+                        var RetailerID = $(this).attr("data-id");
+                         $.ajax({
+                        type: "POST",
+                             url: "@Url.Action("GetEditRegions", "Setup")",
+                             data: { RegionID: RetailerID },
+             success: function (Response)
+             {
+                 $("#RegionID").val(Response.RegionID);
+                 $("#Name").val(Response.Name);
+                 $("#ShortCode").val(Response.ShortCode);
+                 $("#ContactNo").val(Response.ContactNo);
+                 $("#Province").val(Response.Province);
+                 $("#Country").val(Response.Country);
+                 $("#City").val(Response.City);
+                 $("#Address").val(Response.Address);
+            }
+                    });
+                        $('html, body').animate({
+                            scrollTop: $("#main-content").offset().top
+                        }, 500);
+                        $("#RegionID").focus();
+                    });
+                }
+
+                if (UpdateCheck == "@HttpContext.Current.Session["DeleteCheck"]") { $(".delete").css("display", "none"); }
+                else {
+                    $(".delete").on("click", function () {
+
+                        var regionID = $(this).attr("data-id");
+
+                        // confirm dialog
+                        alertify.confirm("Are You Sure You Want To Delete This Record ?  ", function (e) {
+                            if (e) {
+
+                                $.ajax({
+                                    type: "POST",
+                                    url: "@Url.Action("DeleteRegion", "Setup")",
+                                    data: { RegionID: regionID },
+                                    success: function (data) {
+
+                                        if (data == "0") {
+                                            alertify.success('Record Deleted Successfully');
+                                            var table = $('#datatab').DataTable();
+                                            table.row(this).remove().draw(false);
+                                        }
+
+                                        else { alertify.error('This Region Assigned To Regional Head. If You Want To Delete This Region Then First Delete Regional Head Which Assign To This Region.'); }
+                                    }
+
+                                });
+
+                            } else { }
+                        });
+
+                    });
+                }
+            },
+            "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+                $("td:first", nRow).html(iDisplayIndex + 1);
+                return nRow;
+            },
+            "oLanguage": { "sSearch": "Search Client : " },
+            "sDom": 'lftipr',
+            "processing": true,
+            "deferRender": true,
+            "bSelect": true,
+            "columns": [
+                { "data": "RegionID", "sClass": "center-align-td" },
+                { "data": "Name", "sClass": "center-align-td" },
+                { "data": "ShortCode", "sClass": "center-align-td" },
+                { "data": "ContactNo", "sClass": "center-align-td" },
+                { "data": "Country", "sClass": "center-align-td" },
+                { "data": "Province", "sClass": "center-align-td" },
+                { "data": "City", "sClass": "center-align-td" },
+                { "data": "Address", "sClass": "center-align-td" },
+                { "data": "CreatedDate", "sClass": "center-align-td" },
+
+           {
+               "sClass": "center-align-td",
+               "mData": null,
+               "bSortable": false,
+               "mRender": function (data, type, row) {
+                   return '<button class="btn btn-success edit" data-id=' + row.RegionID + ' data-name=' + '"' + row.Name + '"' + ' data-shortcode=' + row.ShortCode + ' data-ContactNo=' + row.ContactNo + ' data-Country=' + row.Country + ' data-Province=' + row.Province + ' data-City=' + row.City + ' data-Address=' + row.Address + '>' + '<i class=icon-pencil></i>' + '</button>&nbsp;<button class="btn btn-info delete" data-id=' + row.RegionID + '>' + '<i class=icon-trash></i>' + '</button>';
+               }
+           }
+            ],
+            "order": [9, "dec"]
+
+        });
+
+    }*@
+
+    $(document).ready(function () {
+
+        $("#liSetup,#liRegion").addClass("active");
+
+        var WriteCheck = "0";
+
+        if (WriteCheck == "@HttpContext.Current.Session["WriteCheck"]") {
+            // $("#btnNew").css("display", "none");
+            $("#btnNew").attr("disabled", true);
+        }
+        else {
+        }
+
+        $("#btnRefresh").click(function () {
+            ClearForm();
+        });
+
+       // GenerateDetailGrid();
+
+    });
+</script>
+<script type="text/javascript">
+
+
+    $('#btnNew').click(function () {
+        debugger;
+        
+        var ConsumerID = $('#ConsumerID').val();
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            url: '@Url.Action("GetBillingData", "Setup")',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify({ ConsumerID: ConsumerID }),
+            success: function (response) {
+                debugger;
+                $("#ConsumerNo").val(response.ConsumerID);
+                $("#ConsumerName").val(response.ConsumerName);
+                $("#AmountDue").val(response.AmountDue);
+                $("#BillPeriodTitle").val(response.BillPeriodTitle);
+
+                const d = new Date(response.DueDate.match(/\d+/)[0] * 1);
+                const formattedDate = d.getFullYear() + '-' + ("0" + (d.getMonth() + 1)).slice(-2) + '-' + ("0" + d.getDate()).slice(-2)
+                $('#DueDate').val(formattedDate);
+
+                const m = new Date(response.BillingMonth.match(/\d+/)[0] * 1);
+                const formattedDatee = m.getFullYear() + '-' + ("0" + (m.getMonth() + 1)).slice(-2) + '-' + ("0" + m.getDate()).slice(-2)
+                $('#BillIssueDate').val(formattedDatee);
+
+            }
+        });
+
+
+
+    });
+
+
+
+
+
+
+
+    function ClearForm() {
+        $('#ConsumerNo').val("");
+        $('#ConsumerName').val("");
+        $('#AmountDue').val("");
+        $('#BillPeriodTitle').val("");
+        $('#DueDate').val("");
+        $('#BillIssueDate').val("");
+        $('#ConsumerID').val("");
+     
+    }
+
+    function OnSuccess(response) {
+        if (response == "1") {
+            alertify.success("Billing Amount Saved Successfully");
+            $('#create').text('Create');
+            var dt = $('#datatab').DataTable();
+            dt.ajax.reload();
+            ClearForm();
+        }
+        else if (response == "0") {
+            alertify.error("Unable To Save Client.");
+        }
+        else if (response == "2") {
+            alertify.error("Billing Amount Already Saved For Consumer");
+        }
+        else {
+            alertify.error(response);
+        }
+
+    }
+
+    function OnFailure(response) {
+        if (response.status == 422) {
+            var errors = JSON.parse(response.responseText);
+            alertify.error(errors.errors);
+        }
+        else {
+            alertify.error(response);
+        }
+    }
+</script>

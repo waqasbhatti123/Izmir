@@ -1,0 +1,444 @@
+﻿@model FOS.Shared.IZBillingParaMeterData
+@{
+    ViewBag.Title = "Billing Parameter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+
+<!-- BEGIN PAGE HEADER-->
+<div class="row-fluid">
+    <div class="span12">
+        <!-- BEGIN THEME CUSTOMIZER-->
+        <!-- END THEME CUSTOMIZER-->
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title"></h3>
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">Billing Parameter</a>
+                <span class="divider">/</span>
+            </li>
+            <li>
+                <a href="#">Billing Parameters</a>
+            </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+    </div>
+</div>
+@using (Ajax.BeginForm("BillingParameterDetail", "IZBillingParameter", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true)
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget green" style="">
+                <div class="widget-title">
+                    <h4 class="text-center"><strong>Billing Parameters</strong></h4>
+                </div>
+                <div class="widget-body">
+                    <div class="span12" style="margin-left:0px;">
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label">Domestic:</label>
+                                <div class="controls">
+                                    <input class="text-box single-line" id="Domestic" autocomplete="off" name="Domestic" type="text" value="" placeholder="Domestic:">
+                                    <span class="field-validation-valid" data-valmsg-for="Domestic" data-valmsg-replace="true"></span>
+                                    <input type="hidden" name="ID" id="ID" value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label">Domestic Temp:</label>
+                                <div class="controls">
+                                    <input class="text-box single-line" id="DomesticTemp" autocomplete="off" name="DomesticTemp" type="text" value="" placeholder="Domestic Temp:">
+                                    <span class="field-validation-valid" data-valmsg-for="DomesticTemp" data-valmsg-replace="true"></span>
+                                    <input type="hidden" name="ID" id="ID" value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label">Commercial:</label>
+                                <div class="controls">
+                                    <input class="text-box single-line" id="Commercial" autocomplete="off" name="Commercial" type="text" value="" placeholder="Commercial:">
+                                    <span class="field-validation-valid" data-valmsg-for="Commercial" data-valmsg-replace="true"></span>
+                                    <input type="hidden" name="ID" id="ID" value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label">Society:</label>
+                                <div class="controls">
+                                    <input class="text-box single-line" id="Society" autocomplete="off" name="Society" type="text" value="" placeholder="Society:">
+                                    <span class="field-validation-valid" data-valmsg-for="Society" data-valmsg-replace="true"></span>
+                                    <input type="hidden" name="ID" id="ID" value="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span12" style="margin-left:0px;">
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label">Tele Communication:</label>
+                                <div class="controls">
+                                    <input class="text-box single-line" id="TeleCommunication" autocomplete="off" name="TeleCommunication" type="text" value="" placeholder="Tele Communication:">
+                                    <span class="field-validation-valid" data-valmsg-for="TeleCommunication" data-valmsg-replace="true"></span>
+                                    <input type="hidden" name="ID" id="ID" value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label">FPA:</label>
+                                <div class="controls">
+                                    <input class="text-box single-line" id="FPA" autocomplete="off" name="FPA" type="text" value="" placeholder="FPA:">
+                                    <span class="field-validation-valid" data-valmsg-for="FPA" data-valmsg-replace="true"></span>
+                                    <input type="hidden" name="ID" id="ID" value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label">Reading Start Date:</label>
+                                <div class="controls">
+                                    <input class="text-box single-line" id="ReadingStartDate" autocomplete="off" name="ReadingStartDate" type="text" value="" placeholder="Reading Start Date:">
+                                    <span class="field-validation-valid" data-valmsg-for="ReadingStartDate" data-valmsg-replace="true"></span>
+                                    <input type="hidden" name="ID" id="ID" value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label">Bill Issue Date:</label>
+                                <div class="controls">
+                                    <input class="text-box single-line" id="BillIssueDate" autocomplete="off" name="BillIssueDate" type="text" value="" placeholder="Bill Issue Date:">
+                                    <span class="field-validation-valid" data-valmsg-for="BillIssueDate" data-valmsg-replace="true"></span>
+                                    <input type="hidden" name="ID" id="ID" value="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span12" style="margin-left:0px">
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label">Bill Due Date:</label>
+                                <div class="controls">
+                                    <input class="text-box single-line" id="BillDueDate" autocomplete="off" name="BillDueDate" type="text" value="" placeholder="Bill Due Date:">
+                                    <span class="field-validation-valid" data-valmsg-for="BillDueDate" data-valmsg-replace="true"></span>
+                                    <input type="hidden" name="ID" id="ID" value="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="span12" style="margin-left:0px;">
+                            <div class="control-group" style="border-top: 1px solid #e5e5e5;">
+                                    <button type="submit" id="btnNew" class="btn btn-primary">
+                                        <i class="icon-ok icon-white" style="padding-right:8px"></i><span id="create">Create</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            <!-- END SAMPLE FORM PORTLET-->
+        </div>
+}
+<!-- BEGIN EDITABLE TABLE widget-->
+<div class="row-fluid">
+    <div class="span12">
+        <!-- BEGIN EXAMPLE TABLE widget-->
+        <div class="widget green">
+            <div class="widget-title">
+                <h4 class="text-center"><strong>Billing Parameters</strong></h4>
+                <span class="tools">
+                    @*<a href="javascript:;" class="icon-chevron-down"></a>*@
+                    @*<a href="javascript:;" class="icon-remove"></a>*@
+                </span>
+            </div>
+            <div class="widget-body">
+                <div>
+                    <div class="clearfix">
+                        @*<div class="btn-group">
+                                <button id="editable-sample_new" class="btn green">
+                                    Add New <i class="icon-plus"></i>
+                                </button>
+                            </div>*@
+                        <div class="btn-group pull-right"></div>
+                    </div>
+                    <div class="space15"></div>
+                    <table class="table table-striped table-hover table-bordered" id="datatab" style="width: 100%;">
+                        <thead>
+                            <tr class="align-center" style="background-color:#1969b1; color:white;">
+                                <th>Sr No</th>
+                                <th>Domestic</th>
+                                <th>Domestic Temp</th>
+                                <th>Commercial</th>
+                                <th>Society</th>
+                                <th>Tele Communicatoin</th>
+                                <th>FPA</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE widget-->
+    </div>
+</div>
+<!-- END EDITABLE TABLE widget-->
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script>
+
+
+    $(document).ready(function () {
+
+        $('#ReadingStartDate').css({ "height": "22px", "width": "202px", "margin-bottom": "0px" });
+        $('#ReadingStartDate').datepicker({ dateFormat: "dd-M-yy" });
+        $('#ReadingStartDate').trigger('change');
+
+        $('#BillIssueDate').css({ "height": "22px", "width": "202px", "margin-bottom": "0px" });
+        $('#BillIssueDate').datepicker({ dateFormat: "dd-M-yy" });
+        $('#BillIssueDate').trigger('change');
+
+        $('#BillDueDate').css({ "height": "22px", "width": "202px", "margin-bottom": "0px" });
+        $('#BillDueDate').datepicker({ dateFormat: "dd-M-yy" });
+        $('#BillDueDate').trigger('change');
+
+    });
+
+
+    function GenerateDetailGrid() {
+
+        //$('#datatab tfoot th').each(function () {
+        //    $(this).html('<input type="text" />');
+        //});
+        var oTable = $('#datatab').DataTable({
+            "aLengthMenu": [[10, 25, 50, 75, 100], [10, 25, 50, 75, 100]],
+            "iDisplayLength": 10,
+            "paging": true,
+            "pagingType": "full_numbers",
+            "serverSide": true,
+            "bRetrieve": true,
+            "bDestroy": true,
+            "autoWidth": true,
+            "ajax":
+            {
+                "type": "POST",
+                "url": '@Url.Action("BillingParaMeterHandler", "IZBillingParameter")',
+                "contentType": 'application/json; charset=utf-8',
+                'data': function (data)
+                {
+                    //data.RegionID = $('#ClientId').val();
+
+                    return data = JSON.stringify(data);
+
+                },
+
+            },
+            "fnDrawCallback": function (osetting) {
+
+                var UpdateCheck = "0";
+                var DeleteCheck = "0";
+
+                if (UpdateCheck == "@HttpContext.Current.Session["UpdateCheck"]") { $(".edit").css("display", "none"); }
+                else {
+                    $(".edit").on("click", function () {
+
+                        ClearForm();
+                        $('#create').text('Update');
+
+                        var CityID = $(this).attr("data-id");
+
+                        try
+                        {
+                            $.ajax({
+                                type: "POST",
+                                url: "@Url.Action("GetByID", "IZBillingParameter")",
+                                data: { ID: CityID },
+
+                                success: function (Response) {
+                                    debugger;
+                                    if (Response != null) {
+                                        $('#ID').val(Response.ID);
+                                        $("#Domestic").val(Response.Domestic);
+                                        $("#DomesticTemp").val(Response.DomesticTemp);
+                                        $("#Commercial").val(Response.Commercial);
+                                        $("#Society").val(Response.Society);
+                                        $("#TeleCommunication").val(Response.TeleCommunication);
+                                        $("#FPA").val(Response.FPA);
+                                        $("#ReadingStartDate").val(Response.ReadingStartDate);
+                                        $("#BillDueDate").val(Response.BillDueDate);
+                                        $("#BillIssueDate").val(Response.BillIssueDate);
+                                        $('html, body').animate({
+                                            scrollTop: $("#main-content").offset().top
+                                        }, 500);
+
+                                        // $("#RegionID").focus();
+                                        //location.reload();
+                                    }
+                                    else { alertify.error('Server Is Not Responding.'); }
+                                }
+                            });
+                        }
+                        catch (ex) { }
+
+                    });
+                }
+
+                if (UpdateCheck == "@HttpContext.Current.Session["DeleteCheck"]") { $(".delete").css("display", "none"); }
+                    else {
+                        $(".delete").on("click", function () {
+
+                            var CityID = $(this).attr("data-id");
+
+                            // confirm dialog
+                            alertify.confirm("Are You Sure You Want To Delete This Record ?  ", function (e) {
+                                if (e) {
+
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "@Url.Action("DeleteProjects", "Setup")",
+                                        data: { cityID: CityID },
+                                        success: function (data) {
+
+                                            if (data == "0") {
+                                                alertify.success('Record Deleted Successfully');
+                                                var table = $('#datatab').DataTable();
+                                                table.row(this).remove().draw(false);
+                                            }
+
+                                            else { alertify.error('This City Assign To Someone, First Delete That Then You Can Able To Delete This City.'); }
+                                        }
+
+                                    });
+
+                                } else { }
+                            });
+
+                        });
+                    }
+
+                },
+                "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+                    $("td:first", nRow).html(iDisplayIndex + 1);
+                    return nRow;
+                },
+                "oLanguage": { "sSearch": "Search Month : " },
+                "sDom": 'lftipr',
+                "processing": true,
+                "deferRender": true,
+                "bSelect": true,
+                "columns": [
+                    { "data": "ID" , "sClass": "center-align-td"},
+                    { "data": "Domestic", "sClass": "center-align-td"},
+                    { "data": "DomesticTemp", "sClass": "center-align-td"},
+                    { "data": "Commercial", "sClass": "center-align-td"},
+                    { "data": "Society", "sClass": "center-align-td"},
+                    { "data": "TeleCommunication" ,"sClass": "center-align-td"},
+                    { "data": "FPA" ,"sClass": "center-align-td"},
+               {
+                   "sClass": "center-align-td",
+                   "mData": null,
+                   "bSortable": false,
+                   "mRender": function (data, type, row) {
+                       return '<button class="btn btn-success edit" data-id=' + row.ID + '>' + '<i class=icon-pencil></i>' + '</button>';
+                   }
+               }
+                ],
+                "order": [3, "dec"]
+
+            });
+
+        }
+
+        $(document).ready(function () {
+
+            $("#liSetup,#liCity").addClass("active");
+
+            var WriteCheck = "0";
+
+            if (WriteCheck == "@HttpContext.Current.Session["WriteCheck"]") {
+            // $("#btnNew").css("display", "none");
+            $("#btnNew").attr("disabled", true);
+        }
+        else {
+            }
+
+
+
+            $("#ClientId").change(function () {
+            $('#Name').val('');
+            $('#CityCode').val('');
+            $('#ShortCode').val('');
+            $('#datatab').dataTable().fnDestroy();
+            GenerateDetailGrid();
+
+        });
+
+        $("#btnRefresh").click(function () {
+            ClearForm();
+        });
+
+        GenerateDetailGrid();
+
+    });
+</script>
+<script type="text/javascript">
+function ClearForm() {
+    $('#ID').val("");
+    $('#Domestic').val("");
+    $('#DomesticTemp').val("");
+    $('#Commercial').val("");
+    $('#Society').val("");
+    $('#TeleCommunication').val("");
+    $('#FPA').val("");
+    $("#ReadingStartDate").val("");
+    $("#BillDueDate").val("");
+    $("#BillIssueDate").val("");
+        $('#Create').text('Create');
+    }
+
+    function OnSuccess(response) {
+
+        if (response == "1") {
+            alertify.success("Month Active Successfully.");
+            $('#create').text('Create');
+            var dt = $('#datatab').DataTable();
+            dt.ajax.reload();
+            ClearForm();
+        }
+        else if (response == "0") {
+            alertify.error("Unable To Save Project  .");
+        }
+        else if (response == "2") {
+            alertify.error("Month Already Exist");
+
+        }
+        else if (response == "3") {
+            alertify.success("Updated Successfully");
+            $('#create').text('Create');
+            var dt = $('#datatab').DataTable();
+            dt.ajax.reload();
+            ClearForm();
+        }
+        else {
+            alertify.error(response);
+        }
+        //location.reload();
+
+    }
+
+    function OnFailure(response) {
+        if (response.status == 422) {
+            var errors = JSON.parse(response.responseText);
+            alertify.error(errors.errors);
+        }
+        else {
+            alertify.error(response);
+        }
+    }</script>

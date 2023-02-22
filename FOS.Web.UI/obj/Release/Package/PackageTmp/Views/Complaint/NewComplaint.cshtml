@@ -1,0 +1,394 @@
+﻿@model FOS.Shared.KSBComplaintData
+@{
+    ViewBag.Title = "Add New Complaint";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="~/Content/Style/UploadPhoto.css" rel="stylesheet" />
+<br />
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget green">
+            <div class="widget-title text-center">
+                <h4><strong>Add New Complaint</strong></h4>
+            </div>
+            <div class="widget-body">
+            @using (Html.BeginForm("NewComplaint", "Complaint", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <div class="span12">
+                                <div class="span3" style="margin-top: 0px;">
+                                    <div class="control-group hidden" style="margin-bottom: 10px">
+                                        <label class="control-label">Select Client:*</label>
+                                        <div class="controls" style="margin-left: 0px">
+                                            @Html.DropDownListFor(model => model.ClientId, new SelectList(Model.Client, "ID", "Name", 27))
+                                            @Html.ValidationMessageFor(model => model.ClientId)
+                                            @Html.HiddenFor(model => model.ClientId)
+                                        </div>
+
+                                    </div>
+                                    <div class="control-group" style="margin-bottom: 10px">
+                                        <label class="control-label">Select Project:*</label>
+                                        <div class="controls" style="margin-left: 0px">
+                                            @Html.DropDownListFor(model => model.ProjectId, new SelectList(Model.Projects, "ID", "Name"), new { @class = "" })
+                                            @Html.HiddenFor(model => model.ProjectId)
+                                            @Html.ValidationMessageFor(model => model.ProjectId)
+                                        </div>
+                                    </div>
+                                    <div class="control-group" style="margin-bottom: 10px">
+                                        <label class="control-label">Select Zone:*</label>
+                                        <div class="controls" style="margin-left: 0px">
+                                            @Html.DropDownListFor(model => model.CityID, new SelectList(Model.Cities, "ID", "Name"), new { @class = "" })
+                                            @Html.ValidationMessageFor(model => model.CityID)
+                                        </div>
+                                    </div>
+                                    <div class="control-group" style="margin-bottom: 10px">
+                                        <label class="control-label">Select Town:*</label>
+                                        <div class="controls" style="margin-left: 0px">
+                                            @Html.DropDownListFor(model => model.AreaID, new SelectList(Model.Areas, "ID", "Name"), new { @class = "Areas" })
+                                            @Html.HiddenFor(model => model.AreaID)
+                                        </div>
+                                    </div>
+                                    <div class="control-group" style="margin-bottom: 10px">
+                                        <label class="control-label">Select Sub Division:*</label>
+                                        <div class="controls" style="margin-left: 0px">
+                                            @Html.DropDownListFor(model => model.SubDivisionID, new SelectList(Model.SubDivisions, "ID", "Name"), new { @class = "Areas" })
+                                            @Html.HiddenFor(model => model.SubDivisionID)
+                                        </div>
+                                    </div>
+                                    <div class="control-group" style="margin-bottom: 10px">
+                                        <label class="control-label">Select Site:*</label>
+                                        <div class="controls" style="margin-left: 0px">
+                                            @Html.DropDownListFor(model => model.SiteId, new SelectList(Model.Sites, "ID", "Name"), new { @class = "Areas" })
+                                            @Html.HiddenFor(model => model.SiteId)
+                                        </div>
+                                    </div>
+                                    <div class="control-group" style="margin-bottom: 10px">
+                                        <label class="control-label">Site ID:*</label>
+                                        <div class="controls" style="margin-left: 0px">
+                                            @Html.TextBoxFor(model => model.DisableSiteID, new { placeholder = "--Select Site First--", @disabled = "disabled" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span3" style="margin-top: 0px;">
+                                    <div class="control-group" style="margin-bottom: 10px">
+                                        <label class="control-label">Select Fault Type: *</label>
+                                        <div class="controls" style="margin-left: 0px">
+                                            @Html.DropDownListFor(model => model.FaulttypeId, new SelectList(Model.faultTypes, "Id", "Name"), new { @class = "Areas" })
+                                            @Html.HiddenFor(model => model.FaulttypeId)
+                                        </div>
+                                    </div>
+                                    <div class="control-group" style="margin-bottom: 10px">
+                                        <label class="control-label">Select Fault Type Detail:</label>
+                                        <div class="controls" style="margin-left: 0px">
+                                            @Html.DropDownListFor(model => model.FaulttypeDetailId, new SelectList(Model.faultTypesDetail, "Id", "Name"), new { @class = "Areas" })
+                                            @Html.HiddenFor(model => model.FaulttypeDetailId)
+                                        </div>
+                                    </div>
+                                    <div class="control-group" style="margin-bottom: 10px" id="OtherRemarks">
+                                        <label class="control-label" style=""> Fault Type Detail Other Remarks:</label>
+                                        <div class="controls" style="margin-left: 0px">
+                                            @Html.EditorFor(model => model.FaultTypeDetailOtherRemarks)
+                                        </div>
+                                    </div>
+                                    <div class="control-group hidden" style="margin-bottom: 10px">
+                                        <label class="control-label">Complaint Type *</label>
+                                        <div class="controls" style="margin-left: 0px">
+                                            @Html.DropDownListFor(model => model.ComplaintTypeID, new SelectList(Model.ComplaintTypes, "ID", "Name", 2), new { @class = "Areas" })
+                                        </div>
+                                    </div>
+                                    <div class="control-group" style="margin-bottom: 0px">
+                                        <label class="control-label" style="">Person Name:</label>
+                                        <div class="controls" style="margin-left: 0px">
+                                            @Html.TextBoxFor(model => model.Name, new { placeholder = "Enter Contact Person Name:", autocomplete = "false" })
+                                        </div>
+                                    </div>
+                                    <div class="control-group" style="margin-bottom: 10px; padding-top:20px;">
+                                        <label class="control-label" style="">Complaint initial Remarks:</label>
+                                        <div class="controls" style="margin-left: 0px">
+                                            @Html.TextAreaFor(model => model.Remarks, new { @style = "height:96px; width:202px; margin: 0px 0px 10px;", placeholder = "Enter Issue:" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span3" style="margin-top: 0px;">
+                                    <div class="user-profile-image">
+                                        <input type="file" name="Picture1" style="display:none" ; class="hidden" id="Picture1" />
+                                        <img src="/Images/KSB_Logo_New.jpg" class="img-responsive" id="Picture1UserImage" />
+                                        <div class="upload-photo" style="width:296px;bottom:163px;">
+                                            <img src="/Images/upload.png" class="img-responsive" />
+                                        </div>
+                                        <div class="remove-photo" style="top:130px;right:395px;">
+                                            <span class="fa fa-window-close"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span3" style="margin-top: 0px;">
+                                    <div class="user-profile-image">
+                                        <input type="file" name="Picture2" style="display:none" ; class="hidden" id="Picture2" />
+                                        <img src="/Images/KSB_Logo_New.jpg" class="img-responsive" id="Picture2UserImage" />
+                                        <div class="upload-photo" id="upload-photo2" style="width:296px;bottom:163px;">
+                                            <img src="/Images/upload.png" class="img-responsive" />
+                                        </div>
+                                        <div class="remove-photo" id="remove-photo2" style="top:130px;right:73px;">
+                                            <span class="fa fa-window-close"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group" style="margin-top: 10px">
+                                    <div class="form-actions" style="float: right; padding-left: 0px;  margin-top: 16px;    margin-right: 246px;">
+                                        <button type="submit" id="btnNew"     class="btn btn-primary" ><span id="create"><i class="icon-arrow-up icon-white" style="padding-right: 8px"></i><b>Save</b></span></button>
+                                        <button type="button" id="btnRefresh" class="btn btn-info"><i class="icon-ban-circle icon-white" style="padding-right: 8px"></i><b> Reset</b></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+        $("#FaultTypeDetailOtherRemarks").hide();
+        $("#OtherRemarks").hide();
+
+    });
+    $("#ProjectId").change(function () {
+
+        LoadCities($(this).val());
+    });
+    $("#CityID").change(function () {
+        LoadAreas($(this).val());
+    });
+    $("#AreaID").change(function () {
+        LoadSubDivision($(this).val());
+    });
+    $("#SubDivisionID").change(function () {
+
+        LoadSites();
+    });
+    $("#SiteId").change(function () {
+
+        LoadSiteID();
+    });
+    $("#FaulttypeId").change(function () {
+
+        LoadFaultTypeDetails();
+        LoadProgressStatusDetails();
+    });
+    $("#FaulttypeDetailId").change(function () {
+        if ($("#FaulttypeDetailId").val() == '3030') {
+            $("#FaultTypeDetailOtherRemarks").show();
+            $("#OtherRemarks").show();
+        }
+        else if ($("#FaulttypeDetailId").val() == '3042') {
+            $("#FaultTypeDetailOtherRemarks").show();
+            $("#OtherRemarks").show();
+        }
+        else if ($("#FaulttypeDetailId").val() == '3049') {
+            $("#FaultTypeDetailOtherRemarks").show();
+            $("#OtherRemarks").show();
+        }
+        else {
+            $("#FaultTypeDetailOtherRemarks").hide();
+            $("#OtherRemarks").hide();
+        }
+
+    });
+
+
+    function LoadCities(RegionalHeadID) {
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("GetZoneList", "Dealer")",
+            data: { RegionID: RegionalHeadID },
+            success: function (json) {
+
+                var $el = $("#CityID");
+                $el.empty(); // remove old options
+                $.each(json, function (value, key) {
+                    $el.append($("<option></option>").val(key.ID).text(key.Name));
+
+                });
+
+
+                var $el = $("#AreaID");
+                $el.empty(); // remove old options
+
+                $("#CityID option:first").trigger("change");
+                // GetAreaList($("#CityID option:first").val());
+            }
+        });
+    }
+    function LoadAreas(CityID) {
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("GetAreaListByCityID", "Dealer")",
+            data: { CityID: CityID == null ? 0 : CityID },
+            success: function (json) {
+
+                var $el = $("#AreaID");
+                $el.empty(); // remove old options
+                $.each(json, function (value, key) {
+                    $el.append($("<option></option>").val(key.ID).text(key.Name));
+                });
+            }
+
+        });
+    }
+    function LoadSubDivision(CityID) {
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("GetSubDivisionListByAreaID", "Dealer")",
+            data: { CityID: CityID == null ? 0 : CityID },
+            success: function (json) {
+
+                var $el = $("#SubDivisionID");
+                $el.empty(); // remove old options
+                $.each(json, function (value, key) {
+                    $el.append($("<option></option>").val(key.ID).text(key.Name));
+                });
+            }
+
+        });
+    }
+    function LoadSites() {
+              var ClientID = $("#ClientId").val();
+              var ProjectID = $("#ProjectId").val();
+              var CityID = $("#CityID").val();
+              var AreaID = $("#AreaID").val();
+              var SubDevID = $("#SubDivisionID").val();
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("GetSitesList", "Complaint")",
+            data: { ClientID: ClientID, ProjectID: ProjectID, CityID: CityID, AreaID: AreaID, SubDivisionID: SubDevID},
+            success: function (json) {
+
+                var $el = $("#SiteId");
+                $el.empty(); // remove old options
+                $.each(json, function (value, key) {
+                    $el.append($("<option></option>").val(key.ID).text(key.Name));
+                });
+
+
+            }
+        });
+    }
+    function LoadSiteID() {
+            var ClientID = $("#SiteId").val();
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("GetSiteId", "Complaint")",
+            data: { ClientID: ClientID},
+            success: function (json) {
+
+                $('#DisableSiteID').val(json);
+
+
+            }
+        });
+        }
+    function LoadFaultTypeDetails() {
+            var ClientID = $("#FaulttypeId").val();
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("GetFaultTypeDetailList", "Complaint")",
+            data: { ClientID: ClientID},
+            success: function (json) {
+
+                var $el = $("#FaulttypeDetailId");
+                $el.empty(); // remove old options
+                $.each(json, function (value, key) {
+                    $el.append($("<option></option>").val(key.ID).text(key.Name));
+                });
+
+
+            }
+        });
+        }
+    function ClearForm() {
+        $('#ProjectId').val(0);
+        $('#CityID').val(0);
+        $('#AreaID').val(0);
+        $('#SubDivisionID').val(0);
+        $('#SiteId').val(0);
+        $('#DisableSiteID ').val("");
+        $('#FaulttypeId').val(0);
+        $('#FaulttypeDetailId').val(0);
+        $('#FaultTypeDetailOtherRemarks ').val("");
+        $('#ComplaintTypeID').val(0);
+        $('#Name').val("");
+        $('#Remarks').val("");
+        $('#Picture1').val("");
+        $("#Picture1UserImage").attr('src', "/Images/KSB_Logo_New.jpg");
+        $('#Picture2').val("");
+        $("#Picture2UserImage").attr('src', "/Images/KSB_Logo_New.jpg");
+    }
+    $("#btnRefresh").click(function () {
+            ClearForm();
+        });
+
+
+
+    //Upload-Picture1 Start
+    $('#Picture1UserImage').click(function () {
+        UploadClickEvent();
+    });
+    $('.upload-photo').click(function () {
+        UploadClickEvent();
+    });
+    function UploadClickEvent() {
+        $('#Picture1').trigger('click');
+    }
+    $('#Picture1').change(function () {
+        if (this.files && this.files[0]) {
+            var fileReader = new FileReader();
+            fileReader.readAsDataURL(this.files[0]);
+            fileReader.onload = function (x) {
+                $('#Picture1UserImage').attr('src', x.target.result);
+
+            }
+        }
+
+    });
+    $('.remove-photo').click(function () {
+        $('#Picture1UserImage').attr('src', "/Images/KSB_Logo_New.jpg");
+    });
+    //Upload-Picture1 End
+
+    //Upload-Picture2 Start
+    $('#Picture2UserImage').click(function () {
+        UploadClickEvent2();
+    });
+    $('#upload-photo2').click(function () {
+        UploadClickEvent2();
+    });
+    function UploadClickEvent2() {
+        $('#Picture2').trigger('click');
+    }
+    $('#Picture2').change(function () {
+        if (this.files && this.files[0]) {
+            var fileReader = new FileReader();
+            fileReader.readAsDataURL(this.files[0]);
+            fileReader.onload = function (x) {
+                $('#Picture2UserImage').attr('src', x.target.result);
+
+            }
+        }
+
+    });
+    $('#remove-photo2').click(function () {
+        $('#Picture2UserImage').attr('src', "/images/KSB_Logo_New.jpg");
+
+    });
+    //Upload-Picture2 End
+</script>

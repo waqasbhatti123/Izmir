@@ -1,0 +1,447 @@
+﻿@model FOS.Shared.IZSocietyChargesData
+@{
+    ViewBag.Title = "Society Charges";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+
+<!-- BEGIN PAGE HEADER-->
+<div class="row-fluid">
+    <div class="span12">
+        <!-- BEGIN THEME CUSTOMIZER-->
+        <!-- END THEME CUSTOMIZER-->
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title"></h3>
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">Setup</a>
+                <span class="divider">/</span>
+            </li>
+            <li>
+                <a href="#">Society Charges</a>
+            </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+    </div>
+</div>
+@using (Ajax.BeginForm("SocityCharges", "IZSocietyCharges", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true)
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget green" style="">
+                <div class="widget-title">
+                    <h4 class="text-center"><strong>Society Charges</strong></h4>
+                </div>
+                <div class="widget-body">
+                    <div class="span12" style="margin-left:0px;">
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label">Reference No:</label>
+                                <div class="controls">
+                                    @Html.DropDownListFor(model => model.ConsumerID, new SelectList(Model.Consumers, "ID", "RefNO"), new { @class = "" })
+                                    @Html.ValidationMessageFor(model => model.ConsumerID)
+                                    <input type="hidden" name="ID" id="ID" value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label">Meter No:</label>
+                                <div class="controls">
+                                    <input class="text-box single-line" id="MeterNo" autocomplete="off" name="MeterNo" type="text" value="" placeholder="Meter No:">
+                                    <span class="field-validation-valid" data-valmsg-for="MeterNo" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label">Street Light:</label>
+                                <div class="controls">
+                                    <input class="text-box single-line" id="StreetLight" autocomplete="off" name="StreetLight" type="text" value="" placeholder="Street Light:">
+                                    <span class="field-validation-valid" data-valmsg-for="StreetLight" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label">Garbage:</label>
+                                <div class="controls">
+                                    <input class="text-box single-line" id="Garbage" autocomplete="off" name="Garbage" type="text" value="" placeholder="Garbage:">
+                                    <span class="field-validation-valid" data-valmsg-for="Garbage" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span12" style="margin-left:0px;">
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label">Water:</label>
+                                <div class="controls">
+                                    <input class="text-box single-line" id="Water" autocomplete="off" name="Water" type="text" value="" placeholder="Water:">
+                                    <span class="field-validation-valid" data-valmsg-for="Water" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label">Sew / Aquafer:</label>
+                                <div class="controls">
+                                    <input class="text-box single-line" id="Sew" autocomplete="off" name="Sew" type="text" value="" placeholder="Sew / Aquafer:">
+                                    <span class="field-validation-valid" data-valmsg-for="Sew" data-valmsg-replace="true"></span>
+                                    <input type="hidden" name="ID" id="ID" value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label">PTV Fee:</label>
+                                <div class="controls">
+                                    <input class="text-box single-line" id="PtvFee" autocomplete="off" name="PtvFee" type="text" value="" placeholder="PTV Fee:">
+                                    <span class="field-validation-valid" data-valmsg-for="PtvFee" data-valmsg-replace="true"></span>
+                                    <input type="hidden" name="ID" id="ID" value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label">Other Charges:</label>
+                                <div class="controls">
+                                    <input class="text-box single-line" id="OtherCharges" autocomplete="off" name="OtherCharges" type="text" value="" placeholder="Other Charges:">
+                                    <span class="field-validation-valid" data-valmsg-for="OtherCharges" data-valmsg-replace="true"></span>
+                                    <input type="hidden" name="ID" id="ID" value="" />
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="span12" style="margin-left:0px">
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label">Maintenance:</label>
+                                <div class="controls">
+                                    <input class="text-box single-line" id="Maintenance" autocomplete="off" name="Maintenance" type="text" value="" placeholder="Maintenance:">
+                                    <span class="field-validation-valid" data-valmsg-for="Maintenance" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span12" style="margin-left:0px;">
+                        <div class="control-group" style="border-top: 1px solid #e5e5e5;">
+                            <button type="submit" id="btnNew" class="btn btn-primary">
+                                <i class="icon-ok icon-white" style="padding-right:8px"></i><span id="create">Create</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- END SAMPLE FORM PORTLET-->
+    </div>
+}
+<!-- BEGIN EDITABLE TABLE widget-->
+<div class="row-fluid">
+    <div class="span12">
+        <!-- BEGIN EXAMPLE TABLE widget-->
+        <div class="widget green">
+            <div class="widget-title">
+                <h4 class="text-center"><strong>Detail of Society Charges</strong></h4>
+                <span class="tools">
+                    @*<a href="javascript:;" class="icon-chevron-down"></a>*@
+                    @*<a href="javascript:;" class="icon-remove"></a>*@
+                </span>
+            </div>
+            <div class="widget-body">
+                <div>
+                    <div class="clearfix">
+                        @*<div class="btn-group">
+                                <button id="editable-sample_new" class="btn green">
+                                    Add New <i class="icon-plus"></i>
+                                </button>
+                            </div>*@
+                        <div class="btn-group pull-right"></div>
+                    </div>
+                    <div class="space15"></div>
+                    <table class="table table-striped table-hover table-bordered" id="datatab" style="width: 100%;">
+                        <thead>
+                            <tr class="align-center" style="background-color:#1969b1; color:white;">
+                                <th>Sr No</th>
+                                <th>Reference No</th>
+                                <th>Street Light</th>
+                                <th>Garbage</th>
+                                <th>Water</th>
+                                <th>Sew</th>
+                                <th>PTV Fee</th>
+                                <th>Other Charges</th>
+                                <th>Maintenance</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE widget-->
+    </div>
+</div>
+<!-- END EDITABLE TABLE widget-->
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script>
+
+
+    $(document).ready(function () {
+
+        $('#ReadingStartDate').css({ "height": "22px", "width": "202px", "margin-bottom": "0px" });
+        $('#ReadingStartDate').datepicker({ dateFormat: "dd-M-yy" });
+        $('#ReadingStartDate').trigger('change');
+
+        $('#BillIssueDate').css({ "height": "22px", "width": "202px", "margin-bottom": "0px" });
+        $('#BillIssueDate').datepicker({ dateFormat: "dd-M-yy" });
+        $('#BillIssueDate').trigger('change');
+
+        $('#BillDueDate').css({ "height": "22px", "width": "202px", "margin-bottom": "0px" });
+        $('#BillDueDate').datepicker({ dateFormat: "dd-M-yy" });
+        $('#BillDueDate').trigger('change');
+
+    });
+
+
+    function GenerateDetailGrid() {
+
+        //$('#datatab tfoot th').each(function () {
+        //    $(this).html('<input type="text" />');
+        //});
+        var oTable = $('#datatab').DataTable({
+            "aLengthMenu": [[10, 25, 50, 75, 100], [10, 25, 50, 75, 100]],
+            "iDisplayLength": 10,
+            "paging": true,
+            "pagingType": "full_numbers",
+            "serverSide": true,
+            "bRetrieve": true,
+            "bDestroy": true,
+            "autoWidth": true,
+            "ajax":
+            {
+                "type": "POST",
+                "url": '@Url.Action("SocityChargesData", "IZSocietyCharges")',
+                "contentType": 'application/json; charset=utf-8',
+                'data': function (data)
+                {
+                    //data.RegionID = $('#ClientId').val();
+
+                    return data = JSON.stringify(data);
+
+                },
+
+            },
+            "fnDrawCallback": function (osetting) {
+
+                var UpdateCheck = "0";
+                var DeleteCheck = "0";
+
+                if (UpdateCheck == "@HttpContext.Current.Session["UpdateCheck"]") { $(".edit").css("display", "none"); }
+                else {
+                    $(".edit").on("click", function () {
+
+                        ClearForm();
+                        $('#create').text('Update');
+
+                        var CityID = $(this).attr("data-id");
+
+                        try
+                        {
+                            $.ajax({
+                                type: "POST",
+                                url: "@Url.Action("GetByID", "IZSocietyCharges")",
+                                data: { ID: CityID },
+
+                                success: function (Response) {
+                                    debugger;
+                                    if (Response != null) {
+                                        $('#ID').val(Response.ID);
+                                        $('#MeterNo').val(Response.MeterNo);
+                                        $('#StreetLight').val(Response.StreetLight);
+                                        $('#Garbage').val(Response.Garbage);
+                                        $('#Water').val(Response.Water);
+                                        $('#Sew').val(Response.Sew);
+                                        $("#PtvFee").val(Response.PtvFee);
+                                        $("#OtherCharges").val(Response.OtherCharges);
+                                        $("#Maintenance").val(Response.Maintenance);
+                                        $("#ConsumerID").val(Response.ConsumerID);
+                                        $('html, body').animate({
+                                            scrollTop: $("#main-content").offset().top
+                                        }, 500);
+
+                                        // $("#RegionID").focus();
+                                        //location.reload();
+                                    }
+                                    else { alertify.error('Server Is Not Responding.'); }
+                                }
+                            });
+                        }
+                        catch (ex) { }
+
+                    });
+                }
+
+                if (UpdateCheck == "@HttpContext.Current.Session["DeleteCheck"]") { $(".delete").css("display", "none"); }
+                    else {
+                        $(".delete").on("click", function () {
+
+                            var CityID = $(this).attr("data-id");
+
+                            // confirm dialog
+                            alertify.confirm("Are You Sure You Want To Delete This Record ?  ", function (e) {
+                                if (e) {
+
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "@Url.Action("DeleteProjects", "Setup")",
+                                        data: { cityID: CityID },
+                                        success: function (data) {
+
+                                            if (data == "0") {
+                                                alertify.success('Record Deleted Successfully');
+                                                var table = $('#datatab').DataTable();
+                                                table.row(this).remove().draw(false);
+                                            }
+
+                                            else { alertify.error('This City Assign To Someone, First Delete That Then You Can Able To Delete This City.'); }
+                                        }
+
+                                    });
+
+                                } else { }
+                            });
+
+                        });
+                    }
+
+                },
+                "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+                    $("td:first", nRow).html(iDisplayIndex + 1);
+                    return nRow;
+                },
+                "oLanguage": { "sSearch": "Search Month : " },
+                "sDom": 'lftipr',
+                "processing": true,
+                "deferRender": true,
+                "bSelect": true,
+                "columns": [
+                    { "data": "ID" , "sClass": "center-align-td"},
+                    { "data": "RefNo", "sClass": "center-align-td"},
+                    { "data": "StreetLight", "sClass": "center-align-td"},
+                    { "data": "Garbage", "sClass": "center-align-td"},
+                    { "data": "Water", "sClass": "center-align-td"},
+                    { "data": "Sew" ,"sClass": "center-align-td"},
+                    { "data": "PtvFee" ,"sClass": "center-align-td"},
+                    { "data": "OtherCharges" ,"sClass": "center-align-td"},
+                    { "data": "Maintenance" ,"sClass": "center-align-td"},
+               {
+                   "sClass": "center-align-td",
+                   "mData": null,
+                   "bSortable": false,
+                   "mRender": function (data, type, row) {
+                       return '<button class="btn btn-success edit" data-id=' + row.ID + '>' + '<i class=icon-pencil></i>' + '</button>';
+                   }
+               }
+                ],
+                "order": [3, "dec"]
+
+            });
+
+        }
+
+        $(document).ready(function () {
+
+            $("#liSetup,#liCity").addClass("active");
+
+            var WriteCheck = "0";
+
+            if (WriteCheck == "@HttpContext.Current.Session["WriteCheck"]") {
+            // $("#btnNew").css("display", "none");
+            $("#btnNew").attr("disabled", true);
+        }
+        else {
+            }
+
+
+
+            $("#ClientId").change(function () {
+            $('#Name').val('');
+            $('#CityCode').val('');
+            $('#ShortCode').val('');
+            $('#datatab').dataTable().fnDestroy();
+            GenerateDetailGrid();
+
+        });
+
+        $("#btnRefresh").click(function () {
+            ClearForm();
+        });
+
+        GenerateDetailGrid();
+
+    });
+</script>
+<script type="text/javascript">
+    function ClearForm() {
+        $('#ID').val("");
+        $('#MeterNo').val("");
+        $('#StreetLight').val("");
+        $('#Garbage').val("");
+        $('#Water').val("");
+        $('#Sew').val("");
+        $("#PtvFee").val("");
+        $("#OtherCharges").val("");
+        $("#Maintenance").val("");
+        $("#ConsumerID").val("0");
+        $('#Create').text('Create');
+    }
+
+    function OnSuccess(response) {
+
+        if (response == "1") {
+            alertify.success("Data Save Successfully.");
+            $('#create').text('Create');
+            var dt = $('#datatab').DataTable();
+            dt.ajax.reload();
+            ClearForm();
+        }
+        else if (response == "0") {
+            alertify.error("Unable To Save Project  .");
+        }
+        else if (response == "2") {
+            alertify.success("Updated Successfully");
+            $('#create').text('Create');
+            var dt = $('#datatab').DataTable();
+            dt.ajax.reload();
+            ClearForm();
+        }
+        else if (response == "3") {
+            alertify.success("Updated Successfully");
+            $('#create').text('Create');
+            var dt = $('#datatab').DataTable();
+            dt.ajax.reload();
+            ClearForm();
+        }
+        else {
+            alertify.error(response);
+        }
+        //location.reload();
+
+    }
+
+    function OnFailure(response) {
+        if (response.status == 422) {
+            var errors = JSON.parse(response.responseText);
+            alertify.error(errors.errors);
+        }
+        else {
+            alertify.error(response);
+        }
+    }</script>

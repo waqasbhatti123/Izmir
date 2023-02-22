@@ -1,0 +1,675 @@
+﻿@model FOS.Shared.IZConsumerData
+@{
+    ViewBag.Title = "Add Consumer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+
+<!-- BEGIN PAGE HEADER-->
+<div class="row-fluid">
+    <div class="span12">
+        <!-- BEGIN THEME CUSTOMIZER-->
+        <!-- END THEME CUSTOMIZER-->
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title"></h3>
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">Setup</a>
+                <span class="divider">/</span>
+            </li>
+            <li>
+                <a href="#">Manage Consumer</a>
+            </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+    </div>
+</div>
+@using (Ajax.BeginForm("AddConsumer", "IZConsumere", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true)
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget green" style="">
+            <div class="widget-title">
+                <h4 class="text-center"><strong>Manage Consumer</strong></h4>
+            </div>
+            <div class="widget-body">
+                <div class="span12">
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Reference No:*</label>
+                            <div class="controls">
+                                <input class="text-box single-line" autocomplete="off" id="RefNO" name="RefNO" type="text" value="" placeholder="Enter Reference No:">
+                                <span class="field-validation-valid" data-valmsg-for="RefNO" data-valmsg-replace="true"></span>
+                                <input type="hidden"   id="ID" name="ID" value="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Owner Name:</label>
+                            <div class="controls">
+                                <input class="text-box single-line" autocomplete="off" id="OwnerName" name="OwnerName" type="text" value="" placeholder="Enter Owner Name">
+                                <span class="field-validation-valid" data-valmsg-for="OwnerName" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Select Block:*</label>
+                            <div class="controls">
+                                @Html.DropDownListFor(model => model.BlocksID, new SelectList(Model.Blocks, "ID", "Name"), new { @class = "" })
+                                @Html.ValidationMessageFor(model => model.BlocksID)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="span12" style="margin-left:0px;">
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Plot No:*</label>
+                            <div class="controls">
+                                <input class="text-box single-line" autocomplete="off" id="PlotNo" name="PlotNo" type="text" value="" placeholder="Enter Plot No:">
+                                <span class="field-validation-valid" data-valmsg-for="PlotNo" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Account No:</label>
+                            <div class="controls">
+                                <input class="text-box single-line" autocomplete="off" id="AccNO" name="AccNO" type="text" value="" placeholder="Enter Acount No:">
+                                <span class="field-validation-valid" data-valmsg-for="AccNO" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Membership No:</label>
+                            <div class="controls">
+                                <input class="text-box single-line" autocomplete="off" id="MemberShip" name="MemberShip" type="text" value="" placeholder="Enter Membership No:">
+                                <span class="field-validation-valid" data-valmsg-for="MemberShip" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="span12" style="margin-left:0px;">
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Sub Account No:</label>
+                            <div class="controls">
+                                <input class="text-box single-line" autocomplete="off" id="SubAccNo" name="SubAccNo" type="text" value="" placeholder="Enter Sub Account No:">
+                                <span class="field-validation-valid" data-valmsg-for="SubAccNo" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Sub Head:</label>
+                            <div class="controls">
+                                <input class="text-box single-line" autocomplete="off" id="SubHead" name="SubHead" type="text" value="" placeholder="Enter Sub Head:">
+                                <span class="field-validation-valid" data-valmsg-for="SubHead" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">CNIC:</label>
+                            <div class="controls">
+                                <input class="text-box single-line" id="CNIC" autocomplete="off" name="CNIC" type="text" value="" placeholder="Enter CNIC">
+                                <span class="field-validation-valid" data-valmsg-for="CNIC" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="span12" style="margin-left:0px;">
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Phone No:</label>
+                            <div class="controls">
+                                <input class="text-box single-line" autocomplete="off" id="PhoneNO" name="PhoneNO" type="text" value="" placeholder="Enter Phone NO:">
+                                <span class="field-validation-valid" data-valmsg-for="PhoneNO" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Cell No:</label>
+                            <div class="controls">
+                                <input class="text-box single-line" autocomplete="off" id="CellNO" name="CellNO" type="text" value="" placeholder="Enter Cell No:">
+                                <span class="field-validation-valid" data-valmsg-for="CellNO" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Teriff:</label>
+                            <div class="controls">
+                                @Html.DropDownListFor(model => model.TriffID, new SelectList(Model.Triff, "ID", "teriffCode"), new { @class = "" })
+                                @Html.ValidationMessageFor(model => model.TriffID)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="span12" style="margin-left:0px;">
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Connection Type:</label> 
+                            <div class="controls">
+                                <select id="Connectiontype" name="Connectiontype">
+                                    <option value="Domestic">Domestic</option>
+                                    <option value="Domestic Temp">Domestic Temp</option>
+                                    <option value="Society">Society</option>
+                                    <option value="Commercial">Commercial</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Co Owner Name:</label>
+                            <div class="controls">
+                                <input class="text-box single-line" id="CoOwnerName" autocomplete="off" name="CoOwnerName" type="text" value="" placeholder="Enter Co Owner Name">
+                                <span class="field-validation-valid" data-valmsg-for="CoOwnerName" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Co Owner CNIC:</label>
+                            <div class="controls">
+                                <input class="text-box single-line" id="CoOwnerCNIC" autocomplete="off" name="CoOwnerCNIC" type="text" value="" placeholder="Enter Co-Owner CNIC">
+                                <span class="field-validation-valid" data-valmsg-for="CoOwnerCNIC" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="span12" style="margin-left:0px;">
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Filer</label>
+                            <div class="controls">
+                                @Html.RadioButtonFor(model => model.Filer, true, new { @checked = "Checked" })&nbsp;<span>Yes</span>
+                                @Html.RadioButtonFor(model => model.Filer, false)&nbsp; <span>No</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">NTN:</label>
+                            <div class="controls">
+                                <input class="text-box single-line" id="NTN" autocomplete="off" name="NTN" type="text" value="" placeholder="Enter NTN">
+                                <span class="field-validation-valid" data-valmsg-for="NTN" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Connection Date:</label>
+                            <div class="controls">
+                                <input class="text-box single-line" autocomplete="off" id="ConnectionDate" name="ConnectionDate" type="text" value="" placeholder="Enter Connection Date:(DD-MM-YY)">
+                                <span class="field-validation-valid" data-valmsg-for="ConnectionDate" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="span12" style="margin-left:0px">
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">PTV:</label>
+                            <div class="controls">
+                                <input class="text-box single-line" id="PTV" autocomplete="off" name="PTV" type="text" value="" placeholder="Enter PTV">
+                                <span class="field-validation-valid" data-valmsg-for="PTV" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Meter No:</label>
+                            <div class="controls">
+                                <input class="text-box single-line" id="MeterNo" autocomplete="off" name="MeterNo" type="text" value="" placeholder="Enter Meter No">
+                                <span class="field-validation-valid" data-valmsg-for="MeterNo" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Meter Type:</label>
+                            <div class="controls">
+                                <select id="MeterTypess" name="MeterTypess">
+                                    <option value="Single Phase">Single Phase</option>
+                                    <option value="Three Phase">Three Phase</option>
+                                    <option value="CT Meter">CT Meter</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="span12" style="margin-left:0px">
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Challan No:</label>
+                            <div class="controls">
+                                <input class="text-box single-line" id="ChallanNo" autocomplete="off" name="ChallanNo" type="text" value="" placeholder="Enter Challan No">
+                                <span class="field-validation-valid" data-valmsg-for="ChallanNo" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Challan Date:</label>
+                            <div class="controls">
+                                <input class="text-box single-line" id="ChallanDate" autocomplete="off" name="ChallanDate" type="text" value="" placeholder="Enter Challan Date">
+                                <span class="field-validation-valid" data-valmsg-for="ChallanDate" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Connection Month:</label>
+                            <div class="controls">
+                                <input class="text-box single-line" id="Month" autocomplete="off" name="Month" type="month" value="" placeholder="Enter ">
+                                <span class="field-validation-valid" data-valmsg-for="Month" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="span12" style="margin-left:0px">
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">M.F:</label>
+                            <div class="controls">
+                                <input class="text-box single-line" id="MultiplyingFector" autocomplete="off" name="MultiplyingFector" type="text" value="" placeholder="Enter M.F">
+                                <span class="field-validation-valid" data-valmsg-for="MultiplyingFector" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Current Reading:</label>
+                            <div class="controls">
+                                <input class="text-box single-line" id="CurrentReading" autocomplete="off" name="CurrentReading" type="text" value="" placeholder="Enter Current Reading">
+                                <span class="field-validation-valid" data-valmsg-for="CurrentReading" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Meter Status:</label>
+                            <div class="controls">
+                                @Html.DropDownListFor(model => model.MeterStatusID, new SelectList(Model.MeterStatuses, "MeterStatusID", "StatusName"), new { @class = "" })
+                                @Html.ValidationMessageFor(model => model.MeterStatusID)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="span12" style="margin-left:0px;">
+                    <div class="control-group" style="border-top: 1px solid #e5e5e5;">
+                        <div class="form-actions text-center" style="padding-left:0px;">
+                            <button type="submit" id="btnNew" class="btn btn-primary">
+                                <i class="icon-ok icon-white" style="padding-right:8px"></i><span id="create">Create</span>
+                            </button>
+                            <button type="button" id="btnRefresh" class="btn btn-info"><i class="icon-ban-circle icon-white" style="padding-right:8px"></i>Reset</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- END SAMPLE FORM PORTLET-->
+    </div>
+</div>
+}
+<!-- BEGIN EDITABLE TABLE widget-->
+<div class="row-fluid">
+    <div class="span12">
+        <!-- BEGIN EXAMPLE TABLE widget-->
+        <div class="widget green">
+            <div class="widget-title">
+                <h4 class="text-center"><strong>All Consumers Detail</strong></h4>
+                <span class="tools">
+                    @*<a href="javascript:;" class="icon-chevron-down"></a>*@
+                    @*<a href="javascript:;" class="icon-remove"></a>*@
+                </span>
+            </div>
+            <div class="widget-body">
+                <div>
+                    <div class="clearfix">
+                        @*<div class="btn-group">
+                            <button id="editable-sample_new" class="btn green">
+                                Add New <i class="icon-plus"></i>
+                            </button>
+                        </div>*@
+                        <div class="btn-group pull-right"></div>
+                    </div>
+                    <div class="space15"></div>
+                    <table class="table table-striped table-hover table-bordered" id="datatab" style="width: 100%;">
+                        <thead>
+                            <tr class="align-center" style="background-color:#1969b1; color:white;">
+                                <th>Sr No</th>
+                                <th>Reference No</th>
+                                <th>Owner Name</th>
+                                <th>Block</th>
+                                <th>Plot No</th>
+                                <th>Teriff</th>
+                                <th>Membership No</th>
+                                <th>Account No</th>
+                                <th>Sub Account No</th>
+                                <th>CNIC</th>
+                                <th>Phone No</th>
+                                <th>Cell No</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE widget-->
+    </div>
+</div>
+<!-- END EDITABLE TABLE widget-->
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script>
+
+
+    $(document).ready(function () {
+        
+
+        $('#ConnectionDate').css({ "height": "22px", "width": "202px", "margin-bottom": "0px" });
+        $('#ConnectionDate').datepicker({ dateFormat: "dd-M-yy" });
+        $('#ConnectionDate').trigger('change');
+
+
+        $('#ChallanDate').css({ "height": "22px", "width": "202px", "margin-bottom": "0px" });
+        $('#ChallanDate').datepicker({ dateFormat: "dd-M-yy" });
+        $('#ChallanDate').trigger('change');
+
+        //$('#AwardDate').css({ "height": "22px", "width": "202px", "margin-bottom": "0px" });
+        //$('#AwardDate').datepicker({ dateFormat: "dd-M-yy" });
+        //$('#AwardDate').trigger('change');
+
+        //$('#DateTo').css({ "height": "22px", "width": "202px", "margin-bottom": "0px" });
+        //$('#DateTo').datepicker({ dateFormat: "dd-M-yy" });
+        //$('#DateTo').trigger('change');
+
+    });
+
+
+    function GenerateDetailGrid() {
+
+        //$('#datatab tfoot th').each(function () {
+        //    $(this).html('<input type="text" />');
+        //});
+        var oTable = $('#datatab').DataTable({
+            "aLengthMenu": [[10, 25, 50, 75, 100], [10, 25, 50, 75, 100]],
+            "iDisplayLength": 10,
+            "paging": true,
+            "pagingType": "full_numbers",
+            "serverSide": true,
+            "bRetrieve": true,
+            "bDestroy": true,
+            "autoWidth": true,
+            "ajax":
+            {
+                "type": "POST",
+                "url": '@Url.Action("ConsumerDataHandler", "IZConsumere")',
+                "contentType": 'application/json; charset=utf-8',
+                'data': function (data) {
+                    //data.RegionID = $('#ClientId').val();
+                    return data = JSON.stringify(data);
+
+                },
+
+            },
+            "fnDrawCallback": function (osetting) {
+
+                var UpdateCheck = "0";
+                var DeleteCheck = "0";
+
+                if (UpdateCheck == "@HttpContext.Current.Session["UpdateCheck"]") { $(".edit").css("display", "none");
+    }
+                else {
+        $(".edit").on("click", function () {
+
+            ClearForm();
+            $('#create').text('Update');
+
+            var CityID = $(this).attr("data-id");
+
+            try {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("GetByID", "IZConsumere")",
+                    data: { ID: CityID },
+
+                    success: function (Response) {
+                        debugger;
+                        if (Response != null) {
+                            $('#ID').val(Response.ID);
+                            $("#RefNO").val(Response.RefNO);
+                            $("#OwnerName").val(Response.OwnerName);
+                            $("#BlocksID").val(Response.BlocksID);
+                            $("#PlotNo").val(Response.PlotNo);
+                            $("#AccNO").val(Response.AccNO);
+                            $("#MemberShip").val(Response.MemberShip);
+                            $("#SubAccNo").val(Response.SubAccNo);
+                            $("#SubHead").val(Response.SubHead);
+                            $("#CNIC").val(Response.CNIC);
+                            $("#PhoneNO").val(Response.PhoneNO);
+                            $("#CellNO").val(Response.CellNO);
+                            $("#TriffID").val(Response.TriffID);
+                            $("#Connectiontype").val(Response.Connectiontype);
+                            $("#CoOwnerName").val(Response.CoOwnerName);
+                            $("#CoOwnerCNIC").val(Response.CoOwnerCNIC);
+                            $("#Filer").val(Response.Filer);
+                            $("#NTN").val(Response.NTN);
+                            $("#ConnectionDate").val(Response.ConnectionDate);
+                            $("#PTV").val(Response.PTV);
+                            $("#MeterNo").val(Response.MeterNo);
+                            $("#MeterTypess").val(Response.MeterTypess);
+                            $("#ChallanNo").val(Response.ChallanNo);
+                            $("#ChallanDate").val(Response.ChallanDate);
+                            $("#Month").val(Response.Month);
+                            $("#MultiplyingFector").val(Response.MultiplyingFector);
+                            $("#CurrentReading").val(Response.CurrentReading);
+                            $("#MeterStatusID").val(Response.MeterStatusID);
+
+                            $('html, body').animate({
+                                scrollTop: $("#main-content").offset().top
+                            }, 500);
+
+                            $("#RegionID").focus();
+
+                        }
+                        else { alertify.error('Server Is Not Responding.'); }
+                    }
+                });
+            }
+            catch (ex) { }
+
+        });
+    }
+
+    if (UpdateCheck == "@HttpContext.Current.Session["DeleteCheck"]") { $(".delete").css("display", "none"); }
+                    else {
+        $(".delete").on("click", function () {
+
+            var CityID = $(this).attr("data-id");
+
+            // confirm dialog
+            alertify.confirm("Are You Sure You Want To Delete This Record ?  ", function (e) {
+                if (e) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("DeleteProjects", "Setup")",
+                        data: { cityID: CityID },
+                        success: function (data) {
+
+                            if (data == "0") {
+                                alertify.success('Record Deleted Successfully');
+                                var table = $('#datatab').DataTable();
+                                table.row(this).remove().draw(false);
+                            }
+
+                            else { alertify.error('This City Assign To Someone, First Delete That Then You Can Able To Delete This City.'); }
+                        }
+
+                    });
+
+                } else { }
+            });
+
+        });
+    }
+
+                },
+    "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+        $("td:first", nRow).html(iDisplayIndex + 1);
+        return nRow;
+    },
+    "oLanguage": { "sSearch": "Search Consumer : " },
+    "sDom": 'lftipr',
+        "processing": true,
+            "deferRender": true,
+                "bSelect": true,
+                    "columns": [
+                        { "data": "ID", "sClass": "center-align-td" },
+                        { "data": "RefNO", "sClass": "center-align-td" },
+                        { "data": "OwnerName", "sClass": "center-align-td" },
+                        { "data": "blockName", "sClass": "center-align-td" },
+                        { "data": "Address", "sClass": "center-align-td" },
+                        { "data": "teriffName", "sClass": "center-align-td" },
+                        { "data": "MemberShip", "sClass": "center-align-td" },
+                        { "data": "AccNO", "sClass": "center-align-td" },
+                        { "data": "SubAccNo", "sClass": "center-align-td" },
+                        { "data": "CNIC", "sClass": "center-align-td" },
+                        { "data": "CellNO", "sClass": "center-align-td" },
+                        { "data": "PhoneNO", "sClass": "center-align-td" },
+                        {
+                            "sClass": "center-align-td",
+                            "mData": null,
+                            "bSortable": false,
+                            "mRender": function (data, type, row) {
+                                return '<button class="btn btn-success edit" data-id=' + row.ID + '>' + '<i class=icon-pencil></i>' + '</button>&nbsp;<button class="btn btn-info delete" data-id=' + row.ID + '>' + '<i class=icon-trash></i>' + '</button>';
+                            }
+                        }
+                    ],
+                        "order": [3, "dec"]
+
+            });
+
+        }
+
+    $(document).ready(function () {
+
+        $("#liSetup,#liCity").addClass("active");
+
+        var WriteCheck = "0";
+
+        if (WriteCheck == "@HttpContext.Current.Session["WriteCheck"]") {
+        // $("#btnNew").css("display", "none");
+        $("#btnNew").attr("disabled", true);
+    }
+        else {
+    }
+
+        $("#PlotNo").change(function () {
+            $vall = $(this).val();
+            $.ajax({
+                url: `/IZConsumere/CheckMeterInstall?PlotNo=${$vall}`,
+                method: 'get',
+            }).success(function () {
+
+            }).OnFailure(function () {
+
+            });
+        });
+
+    $("#ClientId").change(function () {
+        $('#Name').val('');
+        $('#CityCode').val('');
+        $('#ShortCode').val('');
+        $('#datatab').dataTable().fnDestroy();
+        GenerateDetailGrid();
+
+    });
+
+    $("#btnRefresh").click(function () {
+        ClearForm();
+    });
+
+    GenerateDetailGrid();
+
+    });
+</script>
+<script type="text/javascript">
+    function ClearForm() {
+        $('#ID').val("");
+        $('#RefNO').val("");
+        $('#PlotNo').val("");
+        $('#BlocksID').val("1");
+        $('#Address').val("");
+        $('#MemberShip').val("");
+        $('#AccNO').val("");
+        $('#SubAccNo').val("");
+        $('#SubHead').val("");
+        $('#TeriffID').val("1");
+        $('#Connectiontype').val("Domestic");
+        $('#ConnectionDate').val("");
+        $('#OwnerName').val("");
+        $('#CNIC').val("");
+        $('#PhoneNO').val("");
+        $('#CellNO').val("");
+        $('#NTN').val("");
+        $('#CoOwnerName').val("");
+        $('#CoOwnerCNIC').val("");
+        $('#CoOwnerContact').val("");
+        $('#PTV').val("");
+        $('#MeterNo').val("");
+        $('#MeterTypess').val("1");
+        $('#ChallanNo').val("");
+        $('#ChallanDate').val("");
+        $('#Month').val("");
+        $('#MultiplyingFector').val("");
+        $('#CurrentReading').val("");
+        $('#Create').text('Create');
+    }
+
+    function OnSuccess(response) {
+        if (response == "1") {
+            alertify.success("Consumer Saved Successfully.");
+            $('#create').text('Create');
+            var dt = $('#datatab').DataTable();
+            dt.ajax.reload();
+            ClearForm();
+        }
+        else if (response == "0") {
+            alertify.error("Unable To Save Consumer  .");
+        }
+        else if (response == "2") {
+            alertify.success("Updated Successfully");
+            $('#create').text('Create');
+            var dt = $('#datatab').DataTable();
+            dt.ajax.reload();
+            ClearForm();
+        }
+        else {
+            alertify.error(response);
+        }
+
+    }
+
+    function OnFailure(response) {
+        if (response.status == 422) {
+            var errors = JSON.parse(response.responseText);
+            alertify.error(errors.errors);
+        }
+        else {
+            alertify.error(response);
+        }
+    }</script>

@@ -1,0 +1,72 @@
+2022-10-11 01:21:19.6991 - INFO: A new user is trying to sign in
+2022-10-11 01:21:22.9445 - INFO: Correct credentials
+2022-10-11 01:23:30.4970 - INFO: A new user is trying to sign in
+2022-10-11 01:23:34.0437 - INFO: Correct credentials
+2022-10-11 01:29:15.0995 - INFO: A new user is trying to sign in
+2022-10-11 01:29:26.7119 - INFO: Correct credentials
+2022-10-11 01:30:58.7632 - INFO: A new user is trying to sign in
+2022-10-11 01:31:06.5534 - INFO: Correct credentials
+2022-10-11 01:32:31.4883 - INFO: A new user is trying to sign in
+2022-10-11 01:32:37.8336 - INFO: Correct credentials
+2022-10-11 01:59:26.7790 - INFO: A new user is trying to sign in
+2022-10-11 01:59:37.1693 - INFO: Correct credentials
+2022-10-11 02:01:58.1475 - INFO: A new user is trying to sign in
+2022-10-11 02:02:06.8739 - INFO: Correct credentials
+2022-10-11 02:10:15.8755 - INFO: A new user is trying to sign in
+2022-10-11 02:10:22.2855 - INFO: Correct credentials
+2022-10-11 02:40:48.2228 - INFO: A new user is trying to sign in
+2022-10-11 02:40:51.0911 - INFO: Correct credentials
+2022-10-11 03:29:52.4610 - INFO: A new user is trying to sign in
+2022-10-11 03:29:56.2393 - INFO: Correct credentials
+2022-10-11 03:31:29.3411 - INFO: A new user is trying to sign in
+2022-10-11 03:31:32.8471 - INFO: Correct credentials
+2022-10-11 03:33:16.9029 - INFO: A new user is trying to sign in
+2022-10-11 03:33:28.6241 - INFO: Correct credentials
+2022-10-11 03:46:05.7015 - INFO: A new user is trying to sign in
+2022-10-11 03:46:11.3760 - INFO: Correct credentials
+2022-10-11 03:51:55.2297 - INFO: A new user is trying to sign in
+2022-10-11 03:52:02.2285 - INFO: Correct credentials
+2022-10-11 12:54:57.3719 - INFO: A new user is trying to sign in
+2022-10-11 12:55:00.0566 - INFO: Correct credentials
+2022-10-11 12:56:43.8249 - INFO: A new user is trying to sign in
+2022-10-11 12:56:48.3217 - INFO: Correct credentials
+2022-10-11 13:04:36.0329 - INFO: A new user is trying to sign in
+2022-10-11 13:04:36.0608 - INFO: Correct credentials
+2022-10-11 13:11:07.0708 - INFO: A new user is trying to sign in
+2022-10-11 13:11:07.0938 - INFO: Correct credentials
+2022-10-11 13:24:43.7935 - INFO: A new user is trying to sign in
+2022-10-11 13:24:47.3492 - INFO: Correct credentials
+2022-10-11 13:49:24.9597 - INFO: A new user is trying to sign in
+2022-10-11 13:49:28.6794 - INFO: Correct credentials
+2022-10-11 14:11:24.3478 - INFO: A new user is trying to sign in
+2022-10-11 14:11:27.5977 - INFO: Correct credentials
+2022-10-11 14:53:56.2023 - INFO: A new user is trying to sign in
+2022-10-11 14:53:59.2883 - INFO: Correct credentials
+2022-10-11 15:07:56.5867 - ERROR: Get SalesOfficer List Failed
+EXCEPTION: System.InvalidOperationException: Nullable object must have a value.
+   at System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)
+   at System.Nullable`1.get_Value()
+   at FOS.Setup.ManageSaleOffice.<>c__DisplayClass12_1.<GetSaleOfficerListForGrid>b__1(SaleOfficer u) in F:\ZamZamProjects\Project\Izmir\Setup\ManageSaleOffice.cs:line 336
+   at System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at FOS.Setup.ManageSaleOffice.GetSaleOfficerListForGrid(Int32 RegionalHeadType, Int32 RegionalHeadID) in F:\ZamZamProjects\Project\Izmir\Setup\ManageSaleOffice.cs:line 334
+2022-10-11 15:07:57.5618 - ERROR: Get SalesOfficer List Failed
+EXCEPTION: System.InvalidOperationException: Nullable object must have a value.
+   at System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)
+   at System.Nullable`1.get_Value()
+   at FOS.Setup.ManageSaleOffice.<>c__DisplayClass12_1.<GetSaleOfficerListForGrid>b__1(SaleOfficer u) in F:\ZamZamProjects\Project\Izmir\Setup\ManageSaleOffice.cs:line 336
+   at System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at FOS.Setup.ManageSaleOffice.GetSaleOfficerListForGrid(Int32 RegionalHeadType, Int32 RegionalHeadID) in F:\ZamZamProjects\Project\Izmir\Setup\ManageSaleOffice.cs:line 334
+2022-10-11 15:08:03.7310 - INFO: A new user is trying to sign in
+2022-10-11 15:08:03.7520 - INFO: Correct credentials
+2022-10-11 15:11:35.5801 - INFO: A new user is trying to sign in
+2022-10-11 15:11:35.6011 - INFO: Correct credentials
+2022-10-11 16:15:07.7717 - INFO: A new user is trying to sign in
+2022-10-11 16:15:10.5942 - INFO: Correct credentials
+2022-10-11 16:42:08.8250 - INFO: A new user is trying to sign in
+2022-10-11 16:42:12.2477 - INFO: Correct credentials
+2022-10-11 17:00:32.9489 - INFO: A new user is trying to sign in
+2022-10-11 17:00:39.5758 - INFO: Correct credentials

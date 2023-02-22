@@ -1,0 +1,266 @@
+﻿@model FOS.Shared.RegionData
+
+@{
+    ViewBag.Title = "Client";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/GridSystem.css" rel="stylesheet" />
+<!-- BEGIN PAGE HEADER-->
+<div class="row-fluid">
+    <div class="span12">
+        <!-- BEGIN THEME CUSTOMIZER-->
+        <!-- END THEME CUSTOMIZER-->
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        @*<h3 class="page-title"></h3>
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">Setup</a>
+                <span class="divider">/</span>
+            </li>
+            <li>
+                <a href="#">Manage Client</a>
+            </li>
+        </ul>*@
+        <!-- END PAGE TITLE & BREADCRUMB-->
+    </div>
+</div>
+@using (Ajax.BeginForm("AddUpdateRegion", "Setup", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true)
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget green" style="">
+                <div class="widget-title">
+                    <h4 class="text-center"><strong>Change Password</strong></h4>
+                </div>
+                <div class="widget-body">
+                   
+                    <div class="span12" style="margin-left:0px;">
+                        <div class="span4">
+                            <div class="control-group">
+                                <label class="control-label">New Password:*</label>
+                                <div class="controls">
+                                    <input class="text-box single-line" autocomplete="off" id="Name" name="Name" type="text" value="" placeholder="Enter New Password">
+                                    <span class="field-validation-valid" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+                                    @Html.HiddenFor(model => model.RegionID)
+                                </div>
+                            </div>
+                        </div>
+                   
+                    </div>
+                   
+                    
+                    <div class="span12" style="margin-left:0px;">
+                        <div class="control-group" style="border-top: 1px solid #e5e5e5;">
+                            <div class="form-actions" style="padding-left: 540px;">
+                                <button id="btnNew" class="btn btn-primary bold"><i class="icon-ok icon-white"></i><span id="create">Create</span></button>
+                                <button type="button" class="btn btn-small btn-info bold" id="btnRefresh"><i class="icon-ban-circle icon-white"></i>Reset</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+<!-- BEGIN EDITABLE TABLE widget-->
+
+<!-- END EDITABLE TABLE widget-->
+
+<script>
+
+    function GenerateDetailGrid() {
+
+        //$('#datatab tfoot th').each(function () {
+        //    $(this).html('<input type="text" />');
+        //});
+        var oTable = $('#datatab').DataTable({
+            "aLengthMenu": [[10, 25, 50, 75, 100], [10, 25, 50, 75, 100]],
+            "iDisplayLength": 10,
+            "paging": true,
+            "pagingType": "full_numbers",
+            "serverSide": true,
+            "bRetrieve": true,
+            "bDestroy": true,
+            "autoWidth": true,
+            "ajax": {
+                "type": "POST",
+                "url": '@Url.Action("RegionDataHandler", "Setup")',
+                "contentType": 'application/json; charset=utf-8',
+                'data': function (data) {
+                    data.CityID = $('#CityID').val();
+                    return data = JSON.stringify(data);
+                },
+            },
+            "fnDrawCallback": function (osetting) {
+
+                var UpdateCheck = "0";
+                var DeleteCheck = "0";
+
+                if (UpdateCheck == "@HttpContext.Current.Session["UpdateCheck"]") { $(".edit").css("display", "none"); }
+                else {
+                    $(".edit").on("click", function () {
+                        ClearForm();
+                        $('#create').text('Update');
+                        var RetailerID = $(this).attr("data-id");
+                         $.ajax({
+                        type: "POST",
+                             url: "@Url.Action("GetEditRegions", "Setup")",
+                             data: { RegionID: RetailerID },
+             success: function (Response)
+             {
+                 $("#RegionID").val(Response.RegionID);
+                 $("#Name").val(Response.Name);
+                 $("#ShortCode").val(Response.ShortCode);
+                 $("#ContactNo").val(Response.ContactNo);
+                 $("#Province").val(Response.Province);
+                 $("#Country").val(Response.Country);
+                 $("#City").val(Response.City);
+                 $("#Address").val(Response.Address);
+            }
+                    });
+                        $('html, body').animate({
+                            scrollTop: $("#main-content").offset().top
+                        }, 500);
+                        $("#RegionID").focus();
+                    });
+                }
+
+                if (UpdateCheck == "@HttpContext.Current.Session["DeleteCheck"]") { $(".delete").css("display", "none"); }
+                else {
+                    $(".delete").on("click", function () {
+
+                        var regionID = $(this).attr("data-id");
+
+                        // confirm dialog
+                        alertify.confirm("Are You Sure You Want To Delete This Record ?  ", function (e) {
+                            if (e) {
+
+                                $.ajax({
+                                    type: "POST",
+                                    url: "@Url.Action("DeleteRegion", "Setup")",
+                                    data: { RegionID: regionID },
+                                    success: function (data) {
+
+                                        if (data == "0") {
+                                            alertify.success('Record Deleted Successfully');
+                                            var table = $('#datatab').DataTable();
+                                            table.row(this).remove().draw(false);
+                                        }
+
+                                        else { alertify.error('This Region Assigned To Regional Head. If You Want To Delete This Region Then First Delete Regional Head Which Assign To This Region.'); }
+                                    }
+
+                                });
+
+                            } else { }
+                        });
+
+                    });
+                }
+            },
+            "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+                $("td:first", nRow).html(iDisplayIndex + 1);
+                return nRow;
+            },
+            "oLanguage": { "sSearch": "Search Client : " },
+            "sDom": 'lftipr',
+            "processing": true,
+            "deferRender": true,
+            "bSelect": true,
+            "columns": [
+                { "data": "RegionID", "sClass": "center-align-td" },
+                { "data": "Name", "sClass": "center-align-td" },
+                { "data": "ShortCode", "sClass": "center-align-td" },
+                { "data": "ContactNo", "sClass": "center-align-td" },
+                { "data": "Country", "sClass": "center-align-td" },
+                { "data": "Province", "sClass": "center-align-td" },
+                { "data": "City", "sClass": "center-align-td" },
+                { "data": "Address", "sClass": "center-align-td" },
+                { "data": "CreatedDate", "sClass": "center-align-td" },
+
+           {
+               "sClass": "center-align-td",
+               "mData": null,
+               "bSortable": false,
+               "mRender": function (data, type, row) {
+                   return '<button class="btn btn-success edit" data-id=' + row.RegionID + ' data-name=' + '"' + row.Name + '"' + ' data-shortcode=' + row.ShortCode + ' data-ContactNo=' + row.ContactNo + ' data-Country=' + row.Country + ' data-Province=' + row.Province + ' data-City=' + row.City + ' data-Address=' + row.Address + '>' + '<i class=icon-pencil></i>' + '</button>&nbsp;<button class="btn btn-info delete" data-id=' + row.RegionID + '>' + '<i class=icon-trash></i>' + '</button>';
+               }
+           }
+            ],
+            "order": [9, "dec"]
+
+        });
+
+    }
+
+    $(document).ready(function () {
+
+        $("#liSetup,#liRegion").addClass("active");
+
+        var WriteCheck = "0";
+
+        if (WriteCheck == "@HttpContext.Current.Session["WriteCheck"]") {
+            // $("#btnNew").css("display", "none");
+            $("#btnNew").attr("disabled", true);
+        }
+        else {
+        }
+
+        $("#btnRefresh").click(function () {
+            ClearForm();
+        });
+
+       // GenerateDetailGrid();
+
+    });
+</script>
+<script type="text/javascript">
+
+    function ClearForm() {
+        $('#RegionID').val("");
+        $('#Name').val("");
+        $('#ShortCode').val("");
+        $('#ContactNo').val("");
+        $('#Province').val("");
+        $('#Country').val("");
+        $('#City').val("");
+        $('#Address').val("");
+        $('#create').text('Create');
+    }
+
+    function OnSuccess(response) {
+        if (response == "1") {
+            alertify.success("Password Updated Successfully");
+            $('#create').text('Create');
+            var dt = $('#datatab').DataTable();
+            dt.ajax.reload();
+            ClearForm();
+        }
+        else if (response == "0") {
+            alertify.error("Unable To Save Client.");
+        }
+        else if (response == "2") {
+            alertify.error("Client Code Already Exist");
+        }
+        else {
+            alertify.error(response);
+        }
+
+    }
+
+    function OnFailure(response) {
+        if (response.status == 422) {
+            var errors = JSON.parse(response.responseText);
+            alertify.error(errors.errors);
+        }
+        else {
+            alertify.error(response);
+        }
+    }
+</script>
