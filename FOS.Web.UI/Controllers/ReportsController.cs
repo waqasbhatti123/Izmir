@@ -3731,66 +3731,6 @@ namespace FOS.Web.UI.Controllers
                 db.Tbl_IZCreateBill.Add(cre);
                 db.SaveChanges();
             }
-            //Warning[] warnings = null;
-            //String[] streamids = null;
-            //string mimeType = null;
-            //string encoding = null;
-            //string extension = "pdf";
-            //ReportDataSource datasource = null;
-            //ReportDataSource datasourcetwo = null;
-            ////The DeviceInfo settings should be changed based on the reportType
-            ////http://msdn2.microsoft.com/en-us/library/ms155397.aspx
-            //string deviceInfo =
-            //"<DeviceInfo>" +
-            //"  <OutputFormat>" + extension + "</OutputFormat>" +
-            //"  <PageWidth>8.27in</PageWidth>" +
-            //"  <PageHeight>11.69in</PageHeight>" +
-            //"  <MarginTop>0.5in</MarginTop>" +
-            //"  <MarginLeft>0.15in</MarginLeft>" +
-            //"  <MarginRight>0.15in</MarginRight>" +
-            //"  <MarginBottom>0.3in</MarginBottom>" +
-            //"</DeviceInfo>";
-
-            //Tbl_IZBillingPeriod bil = db.Tbl_IZBillingPeriod.Where(x => x.IsActive == true).FirstOrDefault();
-            //int ID = bil.ID;
-
-            //// Setup the report viewer object and get the array of bytes
-            //ReportViewer viewer = new ReportViewer();
-
-            //int blockID = 0;
-
-            //viewer.LocalReport.ReportPath = "RDLC(Reports)/rptPrintBill.rdlc";
-            //List<sp_CunrrentMonthReadingForRpt_Result> get = db.sp_CunrrentMonthReadingForRpt(blockID, ID).ToList();
-            //datasource = new ReportDataSource("DataSet1", get);
-
-
-
-
-            ////ReportParameter[] paramz = new ReportParameter[1];
-            ////paramz[0] = new ReportParameter("Name", "Waqas");
-            ////paramz[1] = new ReportParameter("eDate", end.ToString("dd-MMM-yyyy"));
-            ////paramz[3] = new ReportParameter("brName", brName, false);
-            ////paramz[4] = new ReportParameter("brAddress", brAddress, false);
-            ////paramz[5] = new ReportParameter("brTel", brTel, false);
-
-            //viewer.LocalReport.EnableExternalImages = true;
-            //viewer.LocalReport.Refresh();
-            ////viewer.LocalReport.SetParameters(paramz);
-
-            //viewer.LocalReport.DataSources.Clear();
-            //viewer.LocalReport.DataSources.Add(datasource);
-
-            //Byte[] bytes = viewer.LocalReport.Render(extension == "XLS" ? "EXCEL" : extension, deviceInfo, out mimeType, out encoding, out extension, out streamids, out warnings);
-
-            ////Now that you have all the bytes representing the PDF report, buffer it and send it to the client.
-            //Response.Buffer = true;
-            //Response.Clear();
-            //Response.ContentType = mimeType;
-            //Response.AddHeader("content-disposition", ("attachment; filename=" + "ComplaintDetail" + "_" + DateTime.Now + "_" + DateTime.Now + ".") + extension);
-            //Response.BinaryWrite(bytes);
-            ////// create the file
-            ////// send it to the client to download
-            //Response.Flush();
         }
 
         public JsonResult GetBillingData(DTParameters param,int BlockID)

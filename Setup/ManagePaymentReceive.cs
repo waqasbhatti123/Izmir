@@ -19,7 +19,7 @@ namespace FOS.Setup
             {
                 using (FOSDataModel dbContext = new FOSDataModel())
                 {
-                    var Datas = dbContext.Tbl_IZCreateBill.Where(x => x.BlockID == BlockID && x.BillMonth == BillName).ToList();
+                    var Datas = dbContext.Tbl_IZCreateBill.Where(x => x.BlockID == BlockID && x.BillMonth == BillName && x.unpaid == false).ToList();
                     //.ToList().Select(
                     //    u => new IZCreateBillData
                     //    {
@@ -163,6 +163,71 @@ namespace FOS.Setup
             }
 
             return Data;
+        }
+
+
+        public static List<IZPaymentReceiveData> GetPaymentData(int BillName)
+        {
+            List<IZPaymentReceiveData> Data = new List<IZPaymentReceiveData>();
+            try
+            {
+                using (FOSDataModel dbContext = new FOSDataModel())
+                {
+                    var Datas = dbContext.Tbl_IZPayments.Where(x => x.MonthID == BillName ).ToList();
+                    //.ToList().Select(
+                    //    u => new IZCreateBillData
+                    //    {
+                    //        ID = u.BillID,
+                    //        ConsumerName = u.ConsumerName,
+                    //        ReferenceNo = u.ReferenceNo,
+                    //        TotalBill = Convert.ToInt32(u.TotalBill).ToString(),
+                    //        BillDueDate = Convert.ToDateTime(u.BillDueDate).ToString("dd-MMM-yyyy")
+                    //    }).ToList();
+
+
+                    //List<sp_DisplaySheetReadingMeter_Result> cur = dbContext.sp_DisplaySheetReadingMeter(MonthID).ToList();
+
+                    foreach (var item in Datas)
+                    {
+                        var hoData = new IZPaymentReceiveData();
+                        hoData.ID = item.ID;
+                        hoData.Name = dbContext.Tbl_IZConsumers.Where(x => x.ID == item.ConsumerID).FirstOrDefault().OwnerName;
+                        hoData.RefNo = dbContext.Tbl_IZConsumers.Where(x => x.ID == item.ConsumerID).FirstOrDefault().RefNo;
+                        hoData.Amount = item.Amount;
+                        Data.Add(hoData);
+                    }
+
+                }
+            }
+            catch (Exception exp)
+            {
+                Log.Instance.Error(exp, "Month Name Load Failed");
+                throw;
+            }
+
+            return Data;
+        }
+
+        public static List<IZPaymentReceiveData> GetResultPayData(string search, string sortOrder, int start, int length, List<IZPaymentReceiveData> dtResult, List<string> columnFilters)
+        {
+            return FilterGetPayData(search, dtResult, columnFilters).SortBy(sortOrder).Skip(start).Take(length).ToList();
+        }
+
+        public static int CountPayData(string search, List<IZPaymentReceiveData> dtResult, List<string> columnFilters)
+        {
+            return FilterGetPayData(search, dtResult, columnFilters).Count();
+        }
+
+        private static IQueryable<IZPaymentReceiveData> FilterGetPayData(string search, List<IZPaymentReceiveData> dtResult, List<string> columnFilters)
+        {
+            IQueryable<IZPaymentReceiveData> results = dtResult.AsQueryable();
+
+            results = results.Where(p => (search == null || (p.RefNo != null && p.RefNo.ToLower().Contains(search.ToLower())))
+
+
+                );
+
+            return results;
         }
 
     }
