@@ -115,7 +115,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                     <div class="span12" style="margin-left:0px">
                         <div class="span3">
@@ -124,6 +124,16 @@
                                 <div class="controls">
                                     <input class="text-box single-line" id="Maintenance" autocomplete="off" name="Maintenance" type="text" value="" placeholder="Maintenance:">
                                     <span class="field-validation-valid" data-valmsg-for="Maintenance" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label">Total Amount:</label>
+                                <div class="controls">
+                                    <input class="text-box single-line"  id="totalamount" autocomplete="off" name="totalamount" type="text" value="" placeholder="Total Amount:">
+                                    <span class="field-validation-valid" data-valmsg-for="totalamount" data-valmsg-replace="true"></span>
                                 </div>
                             </div>
                         </div>
@@ -177,6 +187,7 @@
                                 <th>PTV Fee</th>
                                 <th>Other Charges</th>
                                 <th>Maintenance</th>
+                                <th>Total Amount</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -207,6 +218,223 @@
         $('#BillDueDate').datepicker({ dateFormat: "dd-M-yy" });
         $('#BillDueDate').trigger('change');
 
+        $("#StreetLight").keyup(function () {
+            debugger
+            var street = $("#StreetLight").val();
+            var garbage = $("#Garbage").val();
+            var water = $("#Water").val();
+            var sew = $("#Sew").val();
+            var ptv = $("#PtvFee").val();
+            var others = $("#OtherCharges").val();
+            var maintaince = $("#Maintenance").val();
+            if (garbage == null || garbage == "") {
+                garbage = 0;
+            }
+             if (water == null || water == "") {
+                water = 0;
+            }
+             if (sew == null || water == "") {
+                sew = 0;
+            }
+             if (ptv == null || ptv == "") {
+                ptv = 0;
+            }
+             if (others == null || others == "") {
+                others = 0;
+            }
+             if (maintaince == null || maintaince == "") {
+                maintaince = 0;
+            }
+            var total = parseInt(street) + parseInt(garbage) + parseInt(water) + parseInt(sew) + parseInt(ptv) + parseInt(others) + parseInt(maintaince);
+
+            $("#totalamount").val(total);
+        });
+
+        $("#Garbage").keyup(function () {
+            var street = $("#StreetLight").val();
+            var garbage = $("#Garbage").val();
+            var water = $("#Water").val();
+            var sew = $("#Sew").val();
+            var ptv = $("#PtvFee").val();
+            var others = $("#OtherCharges").val();
+            var maintaince = $("#Maintenance").val();
+            if (garbage == null || garbage == "") {
+                garbage = 0;
+            }
+             if (water == null || water == "") {
+                water = 0;
+            }
+             if (sew == null || water == "") {
+                sew = 0;
+            }
+             if (ptv == null || ptv == "") {
+                ptv = 0;
+            }
+             if (others == null || others == "") {
+                others = 0;
+            }
+             if (maintaince == null || maintaince == "") {
+                maintaince = 0;
+            }
+            var total = parseInt(street) + parseInt(garbage) + parseInt(water) + parseInt(sew) + parseInt(ptv) + parseInt(others) + parseInt(maintaince);
+
+            $("#totalamount").val(total);
+        });
+
+        $("#Water").keyup(function () {
+            var street = $("#StreetLight").val();
+            var garbage = $("#Garbage").val();
+            var water = $("#Water").val();
+            var sew = $("#Sew").val();
+            var ptv = $("#PtvFee").val();
+            var others = $("#OtherCharges").val();
+            var maintaince = $("#Maintenance").val();
+            if (garbage == null || garbage == "") {
+                garbage = 0;
+            }
+            if (water == null || water == "") {
+                water = 0;
+            }
+            if (sew == null || sew == "") {
+                sew = 0;
+            }
+            if (ptv == null || ptv == "") {
+                ptv = 0;
+            }
+            if (others == null || others == "") {
+                others = 0;
+            }
+            if (maintaince == null || maintaince == "") {
+                maintaince = 0;
+            }
+            var total = parseInt(street) + parseInt(garbage) + parseInt(water) + parseInt(sew) + parseInt(ptv) + parseInt(others) + parseInt(maintaince);
+
+            $("#totalamount").val(total);
+        });
+
+        $("#Sew").keyup(function () {
+            var street = $("#StreetLight").val();
+            var garbage = $("#Garbage").val();
+            var water = $("#Water").val();
+            var sew = $("#Sew").val();
+            var ptv = $("#PtvFee").val();
+            var others = $("#OtherCharges").val();
+            var maintaince = $("#Maintenance").val();
+            if (garbage == null || garbage == "") {
+                garbage = 0;
+            }
+            if (water == null || water == "") {
+                water = 0;
+            }
+            if (sew == null || sew == "") {
+                sew = 0;
+            }
+            if (ptv == null || ptv == "") {
+                ptv = 0;
+            }
+            if (others == null || others == "") {
+                others = 0;
+            }
+            if (maintaince == null || maintaince == "") {
+                maintaince = 0;
+            }
+            var total = parseInt(street) + parseInt(garbage) + parseInt(water) + parseInt(sew) + parseInt(ptv) + parseInt(others) + parseInt(maintaince);
+
+            $("#totalamount").val(total);
+        });
+
+        $("#PtvFee").keyup(function () {
+            var street = $("#StreetLight").val();
+            var garbage = $("#Garbage").val();
+            var water = $("#Water").val();
+            var sew = $("#Sew").val();
+            var ptv = $("#PtvFee").val();
+            var others = $("#OtherCharges").val();
+            var maintaince = $("#Maintenance").val();
+            if (garbage == null || garbage == "") {
+                garbage = 0;
+            }
+            if (water == null || water == "") {
+                water = 0;
+            }
+            if (sew == null || sew == "") {
+                sew = 0;
+            }
+            if (ptv == null || ptv == "") {
+                ptv = 0;
+            }
+            if (others == null || others == "") {
+                others = 0;
+            }
+            if (maintaince == null || maintaince == "") {
+                maintaince = 0;
+            }
+            var total = parseInt(street) + parseInt(garbage) + parseInt(water) + parseInt(sew) + parseInt(ptv) + parseInt(others) + parseInt(maintaince);
+
+            $("#totalamount").val(total);
+        });
+
+        $("#OtherCharges").keyup(function () {
+            var street = $("#StreetLight").val();
+            var garbage = $("#Garbage").val();
+            var water = $("#Water").val();
+            var sew = $("#Sew").val();
+            var ptv = $("#PtvFee").val();
+            var others = $("#OtherCharges").val();
+            var maintaince = $("#Maintenance").val();
+            if (garbage == null || garbage == "") {
+                garbage = 0;
+            }
+            if (water == null || water == "") {
+                water = 0;
+            }
+            if (sew == null || sew == "") {
+                sew = 0;
+            }
+            if (ptv == null || ptv == "") {
+                ptv = 0;
+            }
+            if (others == null || others == "") {
+                others = 0;
+            }
+            if (maintaince == null || maintaince == "") {
+                maintaince = 0;
+            }
+            var total = parseInt(street) + parseInt(garbage) + parseInt(water) + parseInt(sew) + parseInt(ptv) + parseInt(others) + parseInt(maintaince);
+
+            $("#totalamount").val(total);
+        });
+
+        $("#Maintenance").keyup(function () {
+            var street = $("#StreetLight").val();
+            var garbage = $("#Garbage").val();
+            var water = $("#Water").val();
+            var sew = $("#Sew").val();
+            var ptv = $("#PtvFee").val();
+            var others = $("#OtherCharges").val();
+            var maintaince = $("#Maintenance").val();
+            if (garbage == null || garbage == "") {
+                garbage = 0;
+            }
+            if (water == null || water == "") {
+                water = 0;
+            }
+            if (sew == null || sew == "") {
+                sew = 0;
+            }
+            if (ptv == null || ptv == "") {
+                ptv = 0;
+            }
+            if (others == null || others == "") {
+                others = 0;
+            }
+            if (maintaince == null || maintaince == "") {
+                maintaince = 0;
+            }
+            var total = parseInt(street) + parseInt(garbage) + parseInt(water) + parseInt(sew) + parseInt(ptv) + parseInt(others) + parseInt(maintaince);
+
+            $("#totalamount").val(total);
+        });
     });
 
 
@@ -271,6 +499,7 @@
                                         $("#PtvFee").val(Response.PtvFee);
                                         $("#OtherCharges").val(Response.OtherCharges);
                                         $("#Maintenance").val(Response.Maintenance);
+                                        $("#totalamount").val(Response.totalamount);
                                         $("#ConsumerID").val(Response.ConsumerID);
                                         $('html, body').animate({
                                             scrollTop: $("#main-content").offset().top
@@ -340,7 +569,8 @@
                     { "data": "Sew" ,"sClass": "center-align-td"},
                     { "data": "PtvFee" ,"sClass": "center-align-td"},
                     { "data": "OtherCharges" ,"sClass": "center-align-td"},
-                    { "data": "Maintenance" ,"sClass": "center-align-td"},
+                    { "data": "Maintenance", "sClass": "center-align-td" },
+                    { "data": "totalamount", "sClass":"center-align-td" },
                {
                    "sClass": "center-align-td",
                    "mData": null,
@@ -399,9 +629,12 @@
         $("#PtvFee").val("");
         $("#OtherCharges").val("");
         $("#Maintenance").val("");
+        $("#totalamount").val("");
         $("#ConsumerID").val("0");
         $('#Create').text('Create');
     }
+
+
 
     function OnSuccess(response) {
 

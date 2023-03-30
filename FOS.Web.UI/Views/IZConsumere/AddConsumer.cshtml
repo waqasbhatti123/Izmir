@@ -271,8 +271,13 @@
                         <div class="control-group">
                             <label class="control-label">Connection Month:</label>
                             <div class="controls">
-                                <input class="text-box single-line" id="Month" autocomplete="off" name="Month" type="month" value="" placeholder="Enter ">
-                                <span class="field-validation-valid" data-valmsg-for="Month" data-valmsg-replace="true"></span>
+                                
+
+                                @Html.DropDownListFor(model => model.Month, new SelectList(Model.billing, "ID", "Name"), new { @class = "" })
+                                @Html.ValidationMessageFor(model => model.Month)
+                  
+                                @*<input class="text-box single-line" id="Month" autocomplete="off" name="Month" type="month" value="" placeholder="Enter ">
+                                <span class="field-validation-valid" data-valmsg-for="Month" data-valmsg-replace="true"></span>*@
                             </div>
                         </div>
                     </div>

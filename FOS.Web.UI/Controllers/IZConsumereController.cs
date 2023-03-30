@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace FOS.Web.UI.Controllers
 {
@@ -22,6 +23,8 @@ namespace FOS.Web.UI.Controllers
                 con.Blocks = db.Tbl_IZBlocks.Where(x => x.Status == true).ToList();
                 con.Triff = db.tbl_IZTeriffCode.Where(x => x.IsActive == true).ToList();
                 con.MeterStatuses = db.Tbl_IZMeterStatus.Where(x => x.IsActive == true).ToList();
+                con.billing = db.Tbl_IZBillingPeriod.ToList();
+               
             }
             return View(con);
         }

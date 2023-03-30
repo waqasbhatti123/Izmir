@@ -38,6 +38,7 @@ namespace FOS.Web.UI.Controllers
                     so.OtherCharges = data.OtherCharges;
                     so.PTVFee = data.PtvFee;
                     so.Maintenace = data.Maintenance;
+                    so.totalamount = data.totalamount;
                     db.TBl_IZSocietyCharges.Add(so);
                     db.SaveChanges();
                     return Content("1");
@@ -55,6 +56,7 @@ namespace FOS.Web.UI.Controllers
                     soc.OtherCharges = data.OtherCharges;
                     soc.PTVFee = data.PtvFee;
                     soc.Maintenace = data.Maintenance;
+                    soc.totalamount = data.totalamount;
                     db.Entry(soc).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                     return Content("2");
@@ -109,6 +111,7 @@ namespace FOS.Web.UI.Controllers
                 data.PtvFee = temp.PTVFee;
                 data.OtherCharges = temp.OtherCharges;
                 data.Maintenance = temp.Maintenace;
+                data.totalamount = temp.totalamount;
                 data.MeterNo = temp.meterNo;
                 return Json(data);
             }

@@ -43,6 +43,7 @@ namespace FOS.Shared
         public string MeterTypess { get; set; }
         public string ChallanNo { get; set; }
         public string ChallanDate { get; set; }
+        public List<Tbl_IZBillingPeriod> billing { get; set; }
         public string Month { get; set; }
         public double MultiplyingFector { get; set; }
         public string CurrentReading { get; set; }

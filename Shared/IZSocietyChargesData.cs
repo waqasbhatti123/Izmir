@@ -19,6 +19,7 @@ namespace FOS.Shared
         public string PtvFee { get; set; }
         public string OtherCharges { get; set; }
         public string Maintenance { get; set; }
+        public string totalamount { get; set; }
         public List<IZConsumerData> Consumers { get; set; }
     }
 }
