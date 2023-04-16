@@ -35,9 +35,9 @@
                 <h4>Payment Receive</h4>
                 <span class="tools"></span>
             </div>
-            <div class="widget-body" style="height: 30px;">
+            <div class="widget-body" style="height: 10px;">
                 <div>
-                    <h5><span>Active Month:</span>&nbsp;<b>@ViewBag.BillingMonth</b></h5>
+                    <h3><span>Active Month:</span>&nbsp;<b>@ViewBag.BillingMonth</b></h3>
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@
         <div class="modal-content">
             <div class="modal-header" style="background-color: #1969b1;">
                 <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title" style="font-weight: 900;color: white;"><strong><center>Payment Detail</center></strong></h4>
+                <h4 class="modal-title" style="font-weight: 900;color: white;"><strong><center>Payment Detail </center></strong></h4>
             </div>
             <div class="modal-body">
                 <div class="form-group">
@@ -352,7 +352,7 @@
             var ComplaintID = (ComplaintID);
                     $.ajax({
                         type: "POST",
-                        url: "@Url.Action("GetByID", "IZPaymentReceive")",
+                        url: "@Url.Action("PaymentGetByID", "IZPaymentReceive")",
                         data: { ID: ComplaintID },
                         success: function (Response)
                         {
@@ -360,6 +360,12 @@
                             $("#ID").val(Response.ID);
                             $("#Name").val(Response.Name);
                             $("#RefNo").val(Response.RefNo);
+                            $("#TransactionType").val(Response.TransactionType);
+                            $("#BankID").val(Response.BankID);
+                            $("#PaymentDate").val(Response.PaymentDate);
+                            $("#MonthID").val(Response.MonthID);
+                            $("#BankID").val(Response.BankID);
+                            $("#DateExtended").val(Response.DateExtended);
                             $("#Amount").val(parseInt(Response.Amount));
 
 
@@ -537,7 +543,7 @@
             data.append("DateExtended", $("#DateExtended").val());
             $.ajax({
                 type: "Post",
-                url: "/IZPaymentReceive/PaymentReceivePay",
+                url: "/IZPaymentReceive/PaymentsUpdates",
                 contentType: false,
                 processData: false,
                 cache: false,

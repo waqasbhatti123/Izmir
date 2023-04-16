@@ -120,6 +120,24 @@ namespace FOS.Web.UI.Controllers
             return View(Block);
         }
 
+        public ActionResult PaymentsUpdates(IZPaymentReceiveData data)
+        {
+            using (FOSDataModel db = new FOSDataModel())
+            {
+                Tbl_IZPayments pay = db.Tbl_IZPayments.Where(x => x.ID == data.ID).FirstOrDefault();
+                pay.ConsumerID = pay.ConsumerID;
+                pay.MonthID = data.MonthID;
+                pay.PaymentType = data.TransactionType;
+                pay.BankID = data.BankID;
+                pay.CSV = data.DateExtended;
+                pay.PaymentDate = Convert.ToDateTime(data.PaymentDate);
+                pay.Amount = data.Amount;
+                db.Entry(pay).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return Content("1");
+            }
+        }
+
         public JsonResult GetPaymentData(DTParameters param)
         {
             try
@@ -149,6 +167,26 @@ namespace FOS.Web.UI.Controllers
             catch (Exception ex)
             {
                 return Json(new { error = ex.Message });
+            }
+        }
+
+        public JsonResult PaymentGetByID(int ID)
+        {
+            IZPaymentReceiveData data = new IZPaymentReceiveData();
+            using (FOSDataModel db = new FOSDataModel())
+            {
+                Tbl_IZPayments cre = db.Tbl_IZPayments.Where(x => x.ID == ID).FirstOrDefault();
+                data.ID = cre.ID;
+                data.Name = db.Tbl_IZConsumers.Where(x => x.ID == cre.ConsumerID).FirstOrDefault().OwnerName;
+                data.RefNo = db.Tbl_IZConsumers.Where(x => x.ID == cre.ConsumerID).FirstOrDefault().RefNo;
+                data.Amount = cre.Amount;
+                data.TransactionType = cre.PaymentType;
+                data.BankID = (int)cre.BankID;
+                data.PaymentDate = cre.PaymentDate.Value.ToString("dd-MMM-yyyy");
+                data.MonthID = (int)cre.MonthID;
+                data.DateExtended = cre.CSV;
+
+                return Json(data);
             }
         }
 

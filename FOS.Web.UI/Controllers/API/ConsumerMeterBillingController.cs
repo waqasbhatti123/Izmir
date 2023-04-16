@@ -109,7 +109,7 @@ namespace FOS.Web.UI.Controllers.API
                     }
                     else
                     {
-                        jobDet.PeakReadingPicture = ConvertIntoByte(rm.Picture2, "OrderPicture", DateTime.Now.ToString("dd-mm-yyyy hhmmss").Replace(" ", ""), "OrderingPictures");
+                        jobDet.PeakReadingPicture = ConvertIntoByte2(rm.Picture2, "OrderPicture", DateTime.Now.ToString("dd-mm-yyyy hhmmss").Replace(" ", ""), "OrderingPictures");
                     }
 
                     if (rm.Picture3 == "" || rm.Picture3 == null)
@@ -118,7 +118,7 @@ namespace FOS.Web.UI.Controllers.API
                     }
                     else
                     {
-                        jobDet.OffPeakReadingPicture = ConvertIntoByte(rm.Picture3, "OrderPicture", DateTime.Now.ToString("dd-mm-yyyy hhmmss").Replace(" ", ""), "OrderingPictures");
+                        jobDet.OffPeakReadingPicture = ConvertIntoByte3(rm.Picture3, "OrderPicture", DateTime.Now.ToString("dd-mm-yyyy hhmmss").Replace(" ", ""), "OrderingPictures");
                     }
 
 
@@ -128,7 +128,7 @@ namespace FOS.Web.UI.Controllers.API
                     }
                     else
                     {
-                        jobDet.ExportUnistPicture = ConvertIntoByte(rm.Picture4, "OrderPicture", DateTime.Now.ToString("dd-mm-yyyy hhmmss").Replace(" ", ""), "OrderingPictures");
+                        jobDet.ExportUnistPicture = ConvertIntoByte4(rm.Picture4, "OrderPicture", DateTime.Now.ToString("dd-mm-yyyy hhmmss").Replace(" ", ""), "OrderingPictures");
                     }
 
 
@@ -171,6 +171,57 @@ namespace FOS.Web.UI.Controllers.API
         }
 
         public string ConvertIntoByte(string Base64, string DealerName, string SendDateTime, string folderName)
+        {
+            byte[] bytes = Convert.FromBase64String(Base64);
+            MemoryStream ms = new MemoryStream(bytes, 0, bytes.Length);
+            ms.Write(bytes, 0, bytes.Length);
+            Image image = Image.FromStream(ms, true);
+            //string filestoragename = Guid.NewGuid().ToString() + UserName + ".jpg";
+            string filestoragename = DealerName + SendDateTime;
+            string outputPath = System.Web.HttpContext.Current.Server.MapPath(@"~/Images/" + folderName + "/" + filestoragename + ".jpg");
+            image.Save(outputPath, ImageFormat.Jpeg);
+
+            //string fileName = UserName + ".jpg";
+            //string rootpath = Path.Combine(Server.MapPath("~/Photos/ProfilePhotos/"), Path.GetFileName(fileName));
+            //System.IO.File.WriteAllBytes(rootpath, Convert.FromBase64String(Base64));
+            return @"/Images/" + folderName + "/" + filestoragename + ".jpg";
+        }
+
+        public string ConvertIntoByte2(string Base64, string DealerName, string SendDateTime, string folderName)
+        {
+            byte[] bytes = Convert.FromBase64String(Base64);
+            MemoryStream ms = new MemoryStream(bytes, 0, bytes.Length);
+            ms.Write(bytes, 0, bytes.Length);
+            Image image = Image.FromStream(ms, true);
+            //string filestoragename = Guid.NewGuid().ToString() + UserName + ".jpg";
+            string filestoragename = DealerName + SendDateTime;
+            string outputPath = System.Web.HttpContext.Current.Server.MapPath(@"~/Images/" + folderName + "/" + filestoragename + ".jpg");
+            image.Save(outputPath, ImageFormat.Jpeg);
+
+            //string fileName = UserName + ".jpg";
+            //string rootpath = Path.Combine(Server.MapPath("~/Photos/ProfilePhotos/"), Path.GetFileName(fileName));
+            //System.IO.File.WriteAllBytes(rootpath, Convert.FromBase64String(Base64));
+            return @"/Images/" + folderName + "/" + filestoragename + ".jpg";
+        }
+
+        public string ConvertIntoByte3(string Base64, string DealerName, string SendDateTime, string folderName)
+        {
+            byte[] bytes = Convert.FromBase64String(Base64);
+            MemoryStream ms = new MemoryStream(bytes, 0, bytes.Length);
+            ms.Write(bytes, 0, bytes.Length);
+            Image image = Image.FromStream(ms, true);
+            //string filestoragename = Guid.NewGuid().ToString() + UserName + ".jpg";
+            string filestoragename = DealerName + SendDateTime;
+            string outputPath = System.Web.HttpContext.Current.Server.MapPath(@"~/Images/" + folderName + "/" + filestoragename + ".jpg");
+            image.Save(outputPath, ImageFormat.Jpeg);
+
+            //string fileName = UserName + ".jpg";
+            //string rootpath = Path.Combine(Server.MapPath("~/Photos/ProfilePhotos/"), Path.GetFileName(fileName));
+            //System.IO.File.WriteAllBytes(rootpath, Convert.FromBase64String(Base64));
+            return @"/Images/" + folderName + "/" + filestoragename + ".jpg";
+        }
+
+        public string ConvertIntoByte4(string Base64, string DealerName, string SendDateTime, string folderName)
         {
             byte[] bytes = Convert.FromBase64String(Base64);
             MemoryStream ms = new MemoryStream(bytes, 0, bytes.Length);

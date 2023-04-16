@@ -71,7 +71,9 @@ namespace FOS.Setup
         {
             IQueryable<IZPaymentReceiveData> results = dtResult.AsQueryable();
 
-            results = results.Where(p => (search == null || (p.RefNo != null && p.RefNo.ToLower().Contains(search.ToLower())))
+            results = results.Where(p => (search == null || (p.RefNo != null && p.RefNo.ToLower().Contains(search.ToLower())) ||
+            (p.PlotNo != null && p.PlotNo.ToLower().Contains(search.ToLower())) || (p.Name != null && p.Name.ToLower().Contains(search.ToLower())) 
+            || (p.Payable != null && p.Payable.ToLower().Contains(search.ToLower())) || (p.After != null && p.After.ToLower().Contains(search.ToLower())))
 
 
                 );
