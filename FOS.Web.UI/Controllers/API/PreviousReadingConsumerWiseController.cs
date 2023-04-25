@@ -25,7 +25,6 @@ namespace FOS.Web.UI.Controllers.API
                 {
                     object[] param = { ConsumerID };
                     var billingmonth = db.Tbl_IZBillingPeriod.Where(x => x.IsActive == true).FirstOrDefault();
-
                     var result = db.JobsDetails.Where(x => x.ConsumerID == ConsumerID && x.BillingPeriodID==billingmonth.ID).OrderByDescending(x => x.ID).Select(x => new
                     {
                         ID = x.ID,

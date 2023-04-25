@@ -1,6 +1,6 @@
-﻿@model FOS.Shared.IZMonthCloseData
+﻿@model FOS.Shared.IZBankData
 @{
-    ViewBag.Title = "Month Close";
+    ViewBag.Title = "CSV File";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
@@ -18,14 +18,13 @@
                 <span class="divider">/</span>
             </li>
             <li>
-                <a href="#">Month Close</a>
+                <a href="#">CSV File</a>
             </li>
         </ul>
         <!-- END PAGE TITLE & BREADCRUMB-->
     </div>
 </div>
-@using (Ajax.BeginForm("MonthClose", "IZMonth", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "form-horizontal" }))
-{
+
     @Html.AntiForgeryToken()
 
     @Html.ValidationSummary(true)
@@ -33,78 +32,41 @@
         <div class="span12">
             <div class="widget green" style="">
                 <div class="widget-title">
-                    <h4 class="text-center"><strong>Month Close</strong></h4>
-
+                    <h4 class="text-center"><strong>CSV File Uploader</strong></h4>
                 </div>
                 <div class="widget-body">
-                    <label>@ViewBag.monName</label>
-                    <label> @TempData["msg"]</label>
                     <div class="span12" style="margin-left:0px;">
                         <div class="span3">
                             <div class="control-group">
-                                <label class="control-label"> Month Name:</label>
+                                <label class="control-label">File Upload:</label>
                                 <div class="controls">
-                                    <input class="text-box single-line" id="Name" autocomplete="off" name="Name" type="month" value="">
-                                    <span class="field-validation-valid" data-valmsg-for="Name" data-valmsg-replace="true"></span>
-                                    <input type="hidden" name="ID" id="ID" value="" />
+                                    <input class="text-box single-line" id="BankName" autocomplete="off" name="BankName" type="file" value="" placeholder="Bank Name:">
+                                    <span class="field-validation-valid" data-valmsg-for="BankName" data-valmsg-replace="true"></span>
+                                    <input type="hidden" id="ID" name="ID" value="" />
                                 </div>
                             </div>
                         </div>
-                        @*<div class="span3">
-                            <div class="control-group">
-                                <label class="control-label">Reading Start Date:</label>
-                                <div class="controls">
-                                    <input class="text-box single-line" id="ReadingStart" autocomplete="off" name="ReadingStart" type="text" value="" placeholder="Reading Start:">
-                                    <span class="field-validation-valid" data-valmsg-for="ReadingStart" data-valmsg-replace="true"></span>
-                                    <input type="hidden" name="ID" id="ID" value="" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="span3">
-                            <div class="control-group">
-                                <label class="control-label">Bill Issue Date:</label>
-                                <div class="controls">
-                                    <input class="text-box single-line" id="IssueDate" autocomplete="off" name="IssueDate" type="text" value="" placeholder="Bill Issue Date:">
-                                    <span class="field-validation-valid" data-valmsg-for="IssueDate" data-valmsg-replace="true"></span>
-                                    <input type="hidden" name="ID" id="ID" value="" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="span3">
-                            <div class="control-group">
-                                <label class="control-label">Bill Due Date:</label>
-                                <div class="controls">
-                                    <input class="text-box single-line" id="DueDate" autocomplete="off" name="DueDate" type="text" value="" placeholder="Bill Due Date:">
-                                    <span class="field-validation-valid" data-valmsg-for="DueDate" data-valmsg-replace="true"></span>
-                                    <input type="hidden" name="ID" id="ID" value="" />
-                                </div>
-                            </div>
-                        </div>*@
                     </div>
                     <div class="span12" style="margin-left:0px;">
                         <div class="control-group" style="border-top: 1px solid #e5e5e5;">
-                            <div class="form-actions text-center" style="padding-left:0px;">
-                                <button type="submit" id="btnNew" class="btn btn-primary">
-                                    <i class="icon-ok icon-white" style="padding-right:8px"></i><span id="create">Create</span>
-                                </button>
-                                <button type="button" id="btnRefresh" class="btn btn-info"><i class="icon-ban-circle icon-white" style="padding-right:8px"></i>Reset</button>
-                            </div>
+                            <button type="submit" id="btnClick" class="btn btn-primary">
+                                <i class="icon-ok icon-white" style="padding-right:8px"></i><span id="create">Create</span>
+                            </button>
                         </div>
                     </div>
-
                 </div>
+
             </div>
-            <!-- END SAMPLE FORM PORTLET-->
         </div>
+        <!-- END SAMPLE FORM PORTLET-->
     </div>
-}
 <!-- BEGIN EDITABLE TABLE widget-->
 <div class="row-fluid">
     <div class="span12">
         <!-- BEGIN EXAMPLE TABLE widget-->
         <div class="widget green">
             <div class="widget-title">
-                <h4 class="text-center"><strong>Month Detail</strong></h4>
+                <h4 class="text-center"><strong>Payment Detail</strong></h4>
                 <span class="tools">
                     @*<a href="javascript:;" class="icon-chevron-down"></a>*@
                     @*<a href="javascript:;" class="icon-remove"></a>*@
@@ -125,9 +87,11 @@
                         <thead>
                             <tr class="align-center" style="background-color:#1969b1; color:white;">
                                 <th>Sr No</th>
+                                <th>Consumer Name</th>
                                 <th>Month Name</th>
-                                <th>Active</th>
-                                <th>Actions</th>
+                                <th>Bank Name</th>
+                                <th>Payment Date</th>
+                                <th>Amount</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -145,18 +109,44 @@
 
     $(document).ready(function () {
 
-        $('#ReadingStart').css({ "height": "22px", "width": "202px", "margin-bottom": "0px" });
-        $('#ReadingStart').datepicker({ dateFormat: "dd-M-yy" });
-        $('#ReadingStart').trigger('change');
+        $('#ReadingStartDate').css({ "height": "22px", "width": "202px", "margin-bottom": "0px" });
+        $('#ReadingStartDate').datepicker({ dateFormat: "dd-M-yy" });
+        $('#ReadingStartDate').trigger('change');
 
-        $('#IssueDate').css({ "height": "22px", "width": "202px", "margin-bottom": "0px" });
-        $('#IssueDate').datepicker({ dateFormat: "dd-M-yy" });
-        $('#IssueDate').trigger('change');
+        $('#BillIssueDate').css({ "height": "22px", "width": "202px", "margin-bottom": "0px" });
+        $('#BillIssueDate').datepicker({ dateFormat: "dd-M-yy" });
+        $('#BillIssueDate').trigger('change');
 
-        $('#DueDate').css({ "height": "22px", "width": "202px", "margin-bottom": "0px" });
-        $('#DueDate').datepicker({ dateFormat: "dd-M-yy" });
-        $('#DueDate').trigger('change');
+        $('#BillDueDate').css({ "height": "22px", "width": "202px", "margin-bottom": "0px" });
+        $('#BillDueDate').datepicker({ dateFormat: "dd-M-yy" });
+        $('#BillDueDate').trigger('change');
 
+    });
+
+
+
+    $("#btnClick").click(function () {
+        debugger
+        var data = new FormData();
+        var files = $("#BankName").get(0).files;
+        if (files.length > 0) {
+            data.append("BankName", files[0]);
+        }
+        //data.append("BankName", $("#BankName").val());
+        $.ajax({
+            type: "Post",
+            url: "/CSVFile/UplodFile",
+            contentType: false,
+            processData: false,
+            cache: false,
+            data: data,
+            success: function (result) {
+                alertify.success("Payment Save Successfully");
+                var $tr = $("#datatab").DataTable();
+                $tr.ajax.reload();
+                ClearForm();
+            }
+        });
     });
 
 
@@ -177,7 +167,7 @@
             "ajax":
             {
                 "type": "POST",
-                "url": '@Url.Action("MonthDataHandler", "IZMonth")',
+                "url": '@Url.Action("GetPaymentData", "CSVFile")',
                 "contentType": 'application/json; charset=utf-8',
                 'data': function (data)
                 {
@@ -206,17 +196,16 @@
                         {
                             $.ajax({
                                 type: "POST",
-                                url: "@Url.Action("GetByID", "IZMonth")",
+                                url: "@Url.Action("GetByID", "IZBank")",
                                 data: { ID: CityID },
 
                                 success: function (Response) {
                                     debugger;
                                     if (Response != null) {
                                         $('#ID').val(Response.ID);
-                                        $("#Name").val(Response.Name);
-                                        $("#ReadingStart").val(Response.ReadingStart);
-                                        $("#IssueDate").val(Response.IssueDate);
-                                        $("#DueDate").val(Response.DueDate);
+                                        $('#BankName').val(Response.BankName);
+                                        $('#AccountNo').val(Response.AccountNo);
+                                        $('#Status').val(Response.Status);
                                         $('html, body').animate({
                                             scrollTop: $("#main-content").offset().top
                                         }, 500);
@@ -277,17 +266,12 @@
                 "deferRender": true,
                 "bSelect": true,
                 "columns": [
-               { "data": "ID" , "sClass": "center-align-td"},
-               { "data": "Name", "sClass": "center-align-td"},
-               { "data": "IsActive" ,"sClass": "center-align-td"},
-               {
-                   "sClass": "center-align-td",
-                   "mData": null,
-                   "bSortable": false,
-                   "mRender": function (data, type, row) {
-                       return '<button class="btn btn-success edit" data-id=' + row.ID + '>' + '<i class=icon-pencil></i>' + '</button>';
-                   }
-               }
+                    { "data": "ID" , "sClass": "center-align-td"},
+                    { "data": "Name", "sClass": "center-align-td"},
+                    { "data": "MonthName", "sClass": "center-align-td"},
+                    { "data": "BankName", "sClass": "center-align-td"},
+                    { "data": "Date", "sClass": "center-align-td"},
+                    { "data": "Amount", "sClass": "center-align-td"},
                 ],
                 "order": [3, "dec"]
 
@@ -328,23 +312,18 @@
     });
 </script>
 <script type="text/javascript">
-function ClearForm() {
-        $('#Name').val("");
-    $('#ReadingStart').val("");
-    $('#IssueDate').val("");
-    $('#DueDate').val("");
-        $('#Duration').val("");
-        $('#ContractTitle').val("");
-        $('#ContractNo').val("");
-        $('#AONO').val("");
-        $('#AwardDate').val("");
+    function ClearForm() {
+        $('#ID').val("");
+        $('#BankName').val("");
+        $('#AccountNo').val("");
+        $('#Status').val("");
         $('#Create').text('Create');
     }
 
     function OnSuccess(response) {
 
         if (response == "1") {
-            alertify.success("Month Active Successfully.");
+            alertify.success("Data Save Successfully.");
             $('#create').text('Create');
             var dt = $('#datatab').DataTable();
             dt.ajax.reload();
@@ -354,8 +333,11 @@ function ClearForm() {
             alertify.error("Unable To Save Project  .");
         }
         else if (response == "2") {
-            alertify.error("Month Already Exist");
-
+            alertify.success("Updated Successfully");
+            $('#create').text('Create');
+            var dt = $('#datatab').DataTable();
+            dt.ajax.reload();
+            ClearForm();
         }
         else if (response == "3") {
             alertify.success("Updated Successfully");
@@ -379,4 +361,5 @@ function ClearForm() {
         else {
             alertify.error(response);
         }
-    }</script>
+    }
+</script>

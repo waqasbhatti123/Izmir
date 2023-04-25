@@ -2589,7 +2589,7 @@ namespace FOS.Setup
                 using (FOSDataModel dbContext = new FOSDataModel())
                 {
                     cityData = dbContext.Tbl_IZBillingPeriod
-                            .ToList().Select(
+                            .OrderByDescending(x => x.IsActive).ToList().Select(
                                 u => new IZMonthCloseData
                                 {
                                     ID = u.ID,
@@ -2599,7 +2599,6 @@ namespace FOS.Setup
                                     //DueDate = u.BillDueDate.Value.ToString("dd-MMM-yyyy"),
                                     IsActive = u.IsActive == true? "Yes":"No",
                                 }).ToList();
-
                 }
             }
             catch (Exception exp)

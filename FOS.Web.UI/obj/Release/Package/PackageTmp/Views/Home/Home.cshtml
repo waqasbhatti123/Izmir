@@ -97,18 +97,7 @@
     <hr style="margin:13px;" />
 </div>
 <div class="grid-container">
-    @*<div class="grid-item">
-            <label>From Date:</label>
-            <div class="controls">
-                <input class="text-box single-line" id="StartingDate1" autocomplete="off" name="StartingDate1" style="height: 22px; width: 202px; margin-bottom: 0px;" placeholder="DD-MM-YYYY">
-            </div>
-        </div>
-        <div class="grid-item">
-            <label>To Date:</label>
-            <div class="controls">
-                <input class="text-box single-line" id="StartingDate2" autocomplete="off" name="StartingDate2" style="height: 22px; width: 202px; margin-bottom: 0px;" placeholder="DD-MM-YYYY">
-            </div>
-        </div>*@
+    
     <div class="grid-item">
         <label>Project:</label>
         <div class="controls" style="margin-left: 0px">
@@ -116,7 +105,7 @@
         </div>
     </div>
     <div class="grid-item" style="margin-top: 28px;">
-        <button type="submit" id="ApplyFilter" class="btn btn-primary">
+        <button type="button" id="ApplyFilter" class="btn btn-primary">
             <i class="icon-ok icon-white" style="padding-right: 2px"></i><span style="width:50px"><strong>Apply Filter</strong></span>
         </button>
         @*<button type="submit" id="Clear" class="btn btn-primary">
@@ -129,7 +118,20 @@
                 <i class="icon-remove icon-white" style="padding-right: 2px"></i><span style="width:50px"><strong>Stop AP</strong></span>
             </button>*@
     </div>
-
+    <div class="grid-item" style="margin-top: 28px;">
+        <button type="submit" id="btnNew" class="btn btn-primary">
+            <i class="icon-ok icon-white" style="padding-right: 2px"></i><span style="width:50px"><strong>Report</strong></span>
+        </button>
+        @*<button type="submit" id="Clear" class="btn btn-primary">
+                <i class="icon-remove icon-white" style="padding-right: 2px"></i><span style="width:50px"><strong>Clear</strong></span>
+            </button>
+            <button id="StartAutoPagination" class="btn btn-primary">
+                <i class="icon-ok icon-white" style="padding-right: 2px"></i><span style="width:50px"><strong> Start AP</strong></span>
+            </button>
+            <button id="EndAutoPagination" class="btn btn-primary">
+                <i class="icon-remove icon-white" style="padding-right: 2px"></i><span style="width:50px"><strong>Stop AP</strong></span>
+            </button>*@
+    </div>
 </div>
 <div class="table-responsive">
     <table class="table table-striped table-hover table-bordered" id="datatab">
@@ -517,11 +519,6 @@
 
 
     $(document).ready(function () {
-
-
-
-
-
         //Get Update Complaint Start
         $("#UpdateFaultTypeDetailOtherRemarksBox").hide();
         $("#UpdateProgressStatusOtherRemarksBox").hide();
@@ -550,7 +547,13 @@
         $('input[name=StartingDate2]').css({ "height": "22px", "width": "202px", "margin-bottom": "0px" });
         $('input[name=StartingDate2]').datepicker({ dateFormat: "dd-MM-yy" });
         $("input[name=StartingDate2]").trigger('change');
-         //Calender END
+
+
+        $('#btnNew').click(function () {
+            //var $sdate = $("#StartingDate1").val();
+            window.open("@Url.Action("GetReaedingSheetReport", "Home")" + "?BlockID=" + $("#BlockID").val());
+
+    });
 
     });
 
@@ -713,6 +716,8 @@
 
     }
     //Detail END
+
+
 
     //Get Update Complaint Start
     function UpdateComplaint(ComplaintID,ComplaintStatusID) {

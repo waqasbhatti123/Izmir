@@ -24,7 +24,7 @@ namespace FOS.Web.UI.Controllers
             {
                 if (IZdata.ID == 0)
                 {
-                    dbb.ConnectionID = IZdata.ID;
+                    //dbb.ConnectionID = IZdata.ID;
                     dbb.ConnectionName = IZdata.ConnectionType;
                     dbb.IsActive = true;
                     tb.Tbl_IZConnectionType.Add(dbb);
@@ -36,7 +36,7 @@ namespace FOS.Web.UI.Controllers
                     Tbl_IZConnectionType DB = tb.Tbl_IZConnectionType.Where(x => x.ConnectionID == IZdata.ID).FirstOrDefault();
                     DB.ConnectionName = IZdata.ConnectionType;
                     DB.IsActive = true;
-                    tb.Entry(IZdata).State = System.Data.Entity.EntityState.Modified;
+                    tb.Entry(DB).State = System.Data.Entity.EntityState.Modified;
                     tb.SaveChanges();
                     return Content("2");
                 }

@@ -1,6 +1,6 @@
-﻿@model FOS.Shared.IZBillingParaMeterData
+﻿@model FOS.Shared.IZSocietyChargesData
 @{
-    ViewBag.Title = "Billing Parameter";
+    ViewBag.Title = "Add Bank";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
@@ -14,17 +14,17 @@
         <h3 class="page-title"></h3>
         <ul class="breadcrumb">
             <li>
-                <a href="#">Billing Parameter</a>
+                <a href="#">Setup</a>
                 <span class="divider">/</span>
             </li>
             <li>
-                <a href="#">Billing Parameters</a>
+                <a href="#">Add Bank</a>
             </li>
         </ul>
         <!-- END PAGE TITLE & BREADCRUMB-->
     </div>
 </div>
-@using (Ajax.BeginForm("BillingParameterDetail", "IZBillingParameter", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "form-horizontal" }))
+@using (Ajax.BeginForm("IZBank", "IZBank", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "form-horizontal" }))
 {
     @Html.AntiForgeryToken()
 
@@ -33,118 +33,56 @@
         <div class="span12">
             <div class="widget green" style="">
                 <div class="widget-title">
-                    <h4 class="text-center"><strong>Billing Parameters</strong></h4>
+                    <h4 class="text-center"><strong>Add Bank</strong></h4>
                 </div>
                 <div class="widget-body">
                     <div class="span12" style="margin-left:0px;">
                         <div class="span3">
                             <div class="control-group">
-                                <label class="control-label">Domestic:</label>
+                                <label class="control-label">Bank Name:</label>
                                 <div class="controls">
-                                    <input class="text-box single-line" id="Domestic" autocomplete="off" name="Domestic" type="text" value="" placeholder="Domestic:">
-                                    <span class="field-validation-valid" data-valmsg-for="Domestic" data-valmsg-replace="true"></span>
+                                    <input class="text-box single-line" id="BankName" autocomplete="off" name="BankName" type="text" value="" placeholder="Bank Name:">
+                                    <span class="field-validation-valid" data-valmsg-for="BankName" data-valmsg-replace="true"></span>
+                                    <input type="hidden" id="ID" name="ID" value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span3">
+                            <div class="control-group">
+                                <label class="control-label">Account No:</label>
+                                <div class="controls">
+                                    <input class="text-box single-line" id="AccountNo" autocomplete="off" name="AccountNo" type="text" value="" placeholder="Account No:">
+                                    <span class="field-validation-valid" data-valmsg-for="AccountNo" data-valmsg-replace="true"></span>
                                     <input type="hidden" name="ID" id="ID" value="" />
                                 </div>
                             </div>
                         </div>
                         <div class="span3">
                             <div class="control-group">
-                                <label class="control-label">Domestic Temp:</label>
+                                <label class="control-label">Status:</label>
                                 <div class="controls">
-                                    <input class="text-box single-line" id="DomesticTemp" autocomplete="off" name="DomesticTemp" type="text" value="" placeholder="Domestic Temp:">
-                                    <span class="field-validation-valid" data-valmsg-for="DomesticTemp" data-valmsg-replace="true"></span>
-                                    <input type="hidden" name="ID" id="ID" value="" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="span3">
-                            <div class="control-group">
-                                <label class="control-label">Commercial:</label>
-                                <div class="controls">
-                                    <input class="text-box single-line" id="Commercial" autocomplete="off" name="Commercial" type="text" value="" placeholder="Commercial:">
-                                    <span class="field-validation-valid" data-valmsg-for="Commercial" data-valmsg-replace="true"></span>
-                                    <input type="hidden" name="ID" id="ID" value="" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="span3">
-                            <div class="control-group">
-                                <label class="control-label">Society:</label>
-                                <div class="controls">
-                                    <input class="text-box single-line" id="Society" autocomplete="off" name="Society" type="text" value="" placeholder="Society:">
-                                    <span class="field-validation-valid" data-valmsg-for="Society" data-valmsg-replace="true"></span>
-                                    <input type="hidden" name="ID" id="ID" value="" />
+                                    <select id="Status" name="Status">
+                                        <option value="">Select</option>
+                                        <option value="True">Active</option>
+                                        <option value="False">Deactive</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="span12" style="margin-left:0px;">
-                        <div class="span3">
-                            <div class="control-group">
-                                <label class="control-label">Tele Communication:</label>
-                                <div class="controls">
-                                    <input class="text-box single-line" id="TeleCommunication" autocomplete="off" name="TeleCommunication" type="text" value="" placeholder="Tele Communication:">
-                                    <span class="field-validation-valid" data-valmsg-for="TeleCommunication" data-valmsg-replace="true"></span>
-                                    <input type="hidden" name="ID" id="ID" value="" />
-                                </div>
-                            </div>
+                        <div class="control-group" style="border-top: 1px solid #e5e5e5;">
+                            <button type="submit" id="btnNew" class="btn btn-primary">
+                                <i class="icon-ok icon-white" style="padding-right:8px"></i><span id="create">Create</span>
+                            </button>
                         </div>
-                        <div class="span3">
-                            <div class="control-group">
-                                <label class="control-label">FPA:</label>
-                                <div class="controls">
-                                    <input class="text-box single-line" id="FPA" autocomplete="off" name="FPA" type="text" value="" placeholder="FPA:">
-                                    <span class="field-validation-valid" data-valmsg-for="FPA" data-valmsg-replace="true"></span>
-                                    <input type="hidden" name="ID" id="ID" value="" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="span3">
-                            <div class="control-group">
-                                <label class="control-label">Reading Start Date:</label>
-                                <div class="controls">
-                                    <input class="text-box single-line" id="ReadingStartDate" autocomplete="off" name="ReadingStartDate" type="text" value="" placeholder="Reading Start Date:">
-                                    <span class="field-validation-valid" data-valmsg-for="ReadingStartDate" data-valmsg-replace="true"></span>
-                                    <input type="hidden" name="ID" id="ID" value="" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="span3">
-                            <div class="control-group">
-                                <label class="control-label">Bill Issue Date:</label>
-                                <div class="controls">
-                                    <input class="text-box single-line" id="BillIssueDate" autocomplete="off" name="BillIssueDate" type="text" value="" placeholder="Bill Issue Date:">
-                                    <span class="field-validation-valid" data-valmsg-for="BillIssueDate" data-valmsg-replace="true"></span>
-                                    <input type="hidden" name="ID" id="ID" value="" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="span12" style="margin-left:0px">
-                        <div class="span3">
-                            <div class="control-group">
-                                <label class="control-label">Bill Due Date:</label>
-                                <div class="controls">
-                                    <input class="text-box single-line" id="BillDueDate" autocomplete="off" name="BillDueDate" type="text" value="" placeholder="Bill Due Date:">
-                                    <span class="field-validation-valid" data-valmsg-for="BillDueDate" data-valmsg-replace="true"></span>
-                                    <input type="hidden" name="ID" id="ID" value="" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                        <div class="span12" style="margin-left:0px;">
-                            <div class="control-group" style="border-top: 1px solid #e5e5e5;">
-                                    <button type="submit" id="btnNew" class="btn btn-primary">
-                                        <i class="icon-ok icon-white" style="padding-right:8px"></i><span id="create">Create</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
-            <!-- END SAMPLE FORM PORTLET-->
+
+            </div>
         </div>
+        <!-- END SAMPLE FORM PORTLET-->
+    </div>
 }
 <!-- BEGIN EDITABLE TABLE widget-->
 <div class="row-fluid">
@@ -152,7 +90,7 @@
         <!-- BEGIN EXAMPLE TABLE widget-->
         <div class="widget green">
             <div class="widget-title">
-                <h4 class="text-center"><strong>Billing Parameters</strong></h4>
+                <h4 class="text-center"><strong>Detail of Banks</strong></h4>
                 <span class="tools">
                     @*<a href="javascript:;" class="icon-chevron-down"></a>*@
                     @*<a href="javascript:;" class="icon-remove"></a>*@
@@ -173,12 +111,8 @@
                         <thead>
                             <tr class="align-center" style="background-color:#1969b1; color:white;">
                                 <th>Sr No</th>
-                                <th>Domestic</th>
-                                <th>Domestic Temp</th>
-                                <th>Commercial</th>
-                                <th>Society</th>
-                                <th>Tele Communicatoin</th>
-                                <th>FPA</th>
+                                <th>Bank Name</th>
+                                <th>Account No</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -229,7 +163,7 @@
             "ajax":
             {
                 "type": "POST",
-                "url": '@Url.Action("BillingParaMeterHandler", "IZBillingParameter")',
+                "url": '@Url.Action("GetBankData", "IZBank")',
                 "contentType": 'application/json; charset=utf-8',
                 'data': function (data)
                 {
@@ -258,22 +192,16 @@
                         {
                             $.ajax({
                                 type: "POST",
-                                url: "@Url.Action("GetByID", "IZBillingParameter")",
+                                url: "@Url.Action("GetByID", "IZBank")",
                                 data: { ID: CityID },
 
                                 success: function (Response) {
                                     debugger;
                                     if (Response != null) {
                                         $('#ID').val(Response.ID);
-                                        $("#Domestic").val(Response.Domestic);
-                                        $("#DomesticTemp").val(Response.DomesticTemp);
-                                        $("#Commercial").val(Response.Commercial);
-                                        $("#Society").val(Response.Society);
-                                        $("#TeleCommunication").val(Response.TeleCommunication);
-                                        $("#FPA").val(Response.FPA);
-                                        $("#ReadingStartDate").val(Response.ReadingStartDate);
-                                        $("#BillDueDate").val(Response.BillDueDate);
-                                        $("#BillIssueDate").val(Response.BillIssueDate);
+                                        $('#BankName').val(Response.BankName);
+                                        $('#AccountNo').val(Response.AccountNo);
+                                        $('#Status').val(Response.Status);
                                         $('html, body').animate({
                                             scrollTop: $("#main-content").offset().top
                                         }, 500);
@@ -335,12 +263,8 @@
                 "bSelect": true,
                 "columns": [
                     { "data": "ID" , "sClass": "center-align-td"},
-                    { "data": "Domestic", "sClass": "center-align-td"},
-                    { "data": "DomesticTemp", "sClass": "center-align-td"},
-                    { "data": "Commercial", "sClass": "center-align-td"},
-                    { "data": "Society", "sClass": "center-align-td"},
-                    { "data": "TeleCommunication" ,"sClass": "center-align-td"},
-                    { "data": "FPA" ,"sClass": "center-align-td"},
+                    { "data": "BankName", "sClass": "center-align-td"},
+                    { "data": "AccountNo", "sClass": "center-align-td"},
                {
                    "sClass": "center-align-td",
                    "mData": null,
@@ -389,24 +313,18 @@
     });
 </script>
 <script type="text/javascript">
-function ClearForm() {
-    $('#ID').val("");
-    $('#Domestic').val("");
-    $('#DomesticTemp').val("");
-    $('#Commercial').val("");
-    $('#Society').val("");
-    $('#TeleCommunication').val("");
-    $('#FPA').val("");
-    $("#ReadingStartDate").val("");
-    $("#BillDueDate").val("");
-    $("#BillIssueDate").val("");
+    function ClearForm() {
+        $('#ID').val("");
+        $('#BankName').val("");
+        $('#AccountNo').val("");
+        $('#Status').val("");
         $('#Create').text('Create');
     }
 
     function OnSuccess(response) {
 
         if (response == "1") {
-            alertify.success("Month Active Successfully.");
+            alertify.success("Data Save Successfully.");
             $('#create').text('Create');
             var dt = $('#datatab').DataTable();
             dt.ajax.reload();
@@ -416,8 +334,11 @@ function ClearForm() {
             alertify.error("Unable To Save Project  .");
         }
         else if (response == "2") {
-            alertify.error("Month Already Exist");
-
+            alertify.success("Updated Successfully");
+            $('#create').text('Create');
+            var dt = $('#datatab').DataTable();
+            dt.ajax.reload();
+            ClearForm();
         }
         else if (response == "3") {
             alertify.success("Updated Successfully");
@@ -441,4 +362,5 @@ function ClearForm() {
         else {
             alertify.error(response);
         }
-    }</script>
+    }
+</script>
